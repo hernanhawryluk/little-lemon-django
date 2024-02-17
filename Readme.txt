@@ -1,3 +1,5 @@
+Thanks for review my assignment!
+
 Create a User (Register):
 http://localhost:8000/auth/users/
 

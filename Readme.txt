@@ -1,7 +1,7 @@
-Create a User:
+Create a User (Register):
 http://localhost:8000/auth/users/
 
-Generate Token for user:
+Generate Token for user (Login):
 http://localhost:8000/auth/token/login
 
 Menu path:

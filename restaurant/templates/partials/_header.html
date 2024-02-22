@@ -1,0 +1,30 @@
+{% load static %}
+<nav class="navbar sticky-top navbar-expand-lg bg-white pt-3 pb-3">
+  <div class="container-lg">
+    <header class="col-4">
+      <img src="{% static 'img/logo.png' %}" height="52px" />
+    </header>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav gap-5">
+        <li class="nav-item">
+          <a href="{% url 'home' %}" class="nav-link active">Home</a>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Menu</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Book</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Reservations</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

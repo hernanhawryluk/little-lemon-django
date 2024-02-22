@@ -1,96 +1,221 @@
-{% load static %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Capstone Project</title>
-    <meta name="description" content="Little Lemon Restaurant" />
-    <meta
-      name="author"
-      content="Based in Chicago, Illinois, Little Lemon is a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist."
-    />
-    <link
-      rel="shortcut icon"
-      type="image/png"
-      href="{% static 'img/favicon.ico' %}"
-    />
-    <link
-      rel="preload"
-      as="style"
-      href="{% static 'css/style.css' %}"
-      onload="this.rel = 'stylesheet'"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Karla&family=Markazi+Text:wght@500&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <img src="{% static 'img/logo.png' %}" />
-    <h1 style="text-align: center">Welcome to Little Lemon Restaurant</h1>
-    <nav>
-      <ul>
-        <li><a href="{% url 'index' %}">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Menu</a></li>
-        <li><a href="#">Book</a></li>
-      </ul>
-    </nav>
-    <body>
-      <section>
-        <article id="hero">
-          <h1 class="heading_shadow">SPECIAL OFFER</h1>
-          <p>30% Off This Weekend</p>
-          <a href="#" class="cta"> Book now </a>
-        </article>
-      </section>
-      <section>
-        <article>
-          <h2>Our New Menu</h2>
-          <img src="{% static 'img/grill.jpg' %}" />
-          <p>
-            Our menu consists of 12-15 seasonal items based on Italian, Greek, and
-            Turkish culture.
-          </p>
-          <p>
-            <a href="#">See our new menu</a>
-          </p>
-        </article>
-        <article>
-          <h2>Book a table</h2>
-          <img src="{% static 'img/salad.jpg' %}" />
-          <p>
-            Reserve your table for an Italian, Greek, and Turkish dining
-            experience.
-          </p>
-          <p>
-            <a href="#">Book your table now</a>
-          </p>
-        </article>
-        <article>
-          <h2>Opening Hours</h2>
-          <img src="{% static 'img/head_chef.jpg' %}" />
-          <p>
-            The Little Lemon Restaurant is open 7 days a week, except for public
-            holidays.
-          </p>
-          <ul>
-            <li>Mon - Fri: 2pm - 10pm</li>
-            <li>Sat: 2pm - 11pm</li>
-            <li>Sun: 2pm - 9pm</li>
-          </ul>
-        </article>
-      </section>
-      <footer>
-        <article>
-          <img src="{% static 'img/logo_footer.png' %}" />
-        </article>
-        <article>
-          <p>Copyright &copy; Little Lemon</p>
-        </article>
-      </footer>
-    </body>
-</html>
+<section class="custom-secondary">
+  <div class="container" style="height: 390px">
+    <div class="row">
+      <div
+        class="col col-md-4 d-flex flex-column justify-content-evenly text-shadow"
+        style="height: 340px; padding-top: 40px"
+      >
+        <h1 class="display-2 custom-primary primary-font">
+          <small>Little Lemon</small>
+        </h1>
+        <span class="text-white lead pb-2"><strong>Chicago</strong></span>
+        <p class="text-white lead">
+          <small>
+            We are a family owned Mediterranean restaurant, focused on
+            traditional recipes served with a modern twist.
+          </small>
+        </p>
+        <p class="mt-2">
+          <button class="custom-btn">Book a Table</button>
+        </p>
+      </div>
+      <div class="col-md-2"></div>
+      <div
+        class="col col-md-6 d-none d-md-flex justify-content-center mt-5 container-relative"
+        style="height: 320px"
+      >
+        <img
+          src="{% static 'img/hero.jpg' %}"
+          height="434px"
+          width="320px"
+          class="custom-rounded absolute container-absolute"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container section-margin">
+  <h2 class="display-4 primary-font mb-4 text-shadow" style="font-weight: 600">
+    Discover our restaurant!
+  </h2>
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-5">
+
+    <article class="card custom-rounded shadow main-card">
+      <img
+        src="{% static 'img/head_chef.jpg' %}"
+        class="card-img-top custom-rounded-top"
+        width="240px"
+      />
+      <div class="card-body">
+        <h4 class="card-title mt-1">Opening Hours</h4>
+        <p class="card-text pt-1">
+          The Little Lemon Restaurant is open 7 days a week, except for public holidays and special occasions.
+        </p>
+        <ul>
+          <li>Mon - Fri: 2pm - 10pm</li>
+          <li>Sat: 2pm - 11pm</li>
+          <li>Sun: 2pm - 9pm</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="card custom-rounded shadow main-card">
+      <img
+        src="{% static 'img/grill.jpg' %}"
+        class="card-img-top custom-rounded-top"
+        width="240px"
+      />
+      <div class="card-body">
+        <h4 class="card-title mt-1">Our New Menu</h4>
+        <p class="card-text pt-1">
+          Our menu consists of 12-15 seasonal items based on Italian, Greek, and
+          Turkish culture.
+        </p>
+        <p class="d-flex justify-content-center pt-3">
+          <button class="custom-btn">See our new menu</button>
+        </p>
+      </div>
+    </article>
+
+    <article class="card custom-rounded shadow main-card">
+      <img
+        src="{% static 'img/salad.jpg' %}"
+        class="card-img-top custom-rounded-top"
+        width="240px"
+      />
+      <div class="card-body">
+        <h4 class="card-title mt-1">Book a table</h4>
+        <p class="card-text pt-1">
+          Reserve your table online for an Italian, Greek, and Turkish dining
+          experience at our restaurant.
+        </p>
+        <p class="d-flex justify-content-center pt-3">
+          <button class="custom-btn">Book a Table</button>
+        </p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="custom-secondary section-padding">
+  <div class="container py-5">
+    <div class="row row-cols-1 row-cols-md-2">
+      <div
+        class="col d-flex flex-column justify-content-evenly text-white text-shadow py-5"
+      >
+        <h2 class="pb-1">Little Lemon</h2>
+        <p>
+          Little Lemon is owned by two Italian brothers, Mario and Adrian, who
+          moved to the United States to pursue their shared dream of owning a
+          restaurant.
+        </p>
+        <p>
+          To craft the menu, Mario relies on family recipes and his experience
+          as a chef in Italy. Adrian does all the marketing for the restaurant
+          and led the effort to expand the menu beyond classic Italian to
+          incorporate additional cuisines from the Mediterranean region.
+        </p>
+        <p class="mt-3">
+          <button class="custom-btn">More about us</button>
+        </p>
+      </div>
+      <div class="col container-relative" style="height: 440px;">
+        <img
+          src="{% static 'img/about-1.jpg' %}"
+          alt=""
+          class="custom-rounded special-img-1"
+        />
+        <img
+          src="{% static 'img/about-2.jpg' %}"
+          alt=""
+          class="custom-rounded special-img-2"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container section-margin">
+  <div class="d-flex justify-content-between mb-3">
+    <h5 class="display-4 primary-font mb-4 text-shadow" style="font-weight: 600">
+      This week specials!
+    </h5>
+    <span class="mt-1">
+      <button class="custom-btn">Order a Delivery</button>
+    </span>
+  </div>
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-4">
+    <article class="card custom-rounded shadow secondary-card">
+      <img
+        src="{% static 'img/bruschetta.jpg' %}"
+        height="240px"
+        class="card-img-top custom-rounded-top"
+      />
+      <div class="card-body">
+        <h5 class="card-title mt-1">Bruschetta</h5>
+        <p class="card-text pt-1">
+          Our Bruschetta is made from grilled bread that has been smeared with garlic, seasoned with salt, and drizzled with olive oil, creating a delightful appetizer.
+        </p>
+        <p class="d-flex justify-content-center pt-2">
+          <button class="custom-btn">Add to Cart</button>
+        </p>
+      </div>
+    </article>
+
+    <article class="card custom-rounded shadow secondary-card">
+      <img
+        src="{% static 'img/greek-salad.jpg' %}"
+        height="240px"
+        class="card-img-top custom-rounded-top"
+      />
+      <div class="card-body">
+        <h5 class="card-title mt-1">Greek Salad</h5>
+        <p class="card-text pt-1">
+          The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese, garnished with crunchy garlic and rosemary croutons.
+        </p>
+        <p class="d-flex justify-content-center pt-2">
+          <button class="custom-btn">Add to Cart</button>
+        </p>
+      </div>
+    </article>
+
+    <article class="card custom-rounded shadow secondary-card">
+      <img
+        src="{% static 'img/grilled-fish.jpg' %}"
+        height="240px"
+        class="card-img-top custom-rounded-top"
+      />
+      <div class="card-body">
+        <h5 class="card-title mt-1">Greed Fish</h5>
+        <p class="card-text pt-1">
+          The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese, garnished with crunchy garlic and rosemary croutons.
+        </p>
+        <p class="d-flex justify-content-center pt-2">
+          <button class="custom-btn">Add to Cart</button>
+        </p>
+      </div>
+    </article>
+
+    <article class="card custom-rounded shadow secondary-card">
+      <img
+        src="{% static 'img/lemon-dessert.jpg' %}"
+        height="240px"
+        class="card-img-top custom-rounded-top"
+      />
+      <div class="card-body">
+        <h5 class="card-title mt-1">Lemon Dessert</h5>
+        <p class="card-text pt-1">
+          This comes straight from grandma’s cherished recipe book, every last ingredient has been sourced and is as authentic and nostalgic as can be imagined.
+        </p>
+        <span class="d-flex justify-content-center pt-2">
+          <button class="custom-btn">Add to Cart</button>
+        </span>
+      </div>
+    </article>
+  </section>
+
+{% endblock %}

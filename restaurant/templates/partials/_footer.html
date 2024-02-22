@@ -1,0 +1,49 @@
+{% load static %}
+<footer class="custom-secondary section-padding">
+  <div class="container pt-5">
+    <article
+      class="row row-cols-1 row-cols-md-6 justify-content-between text-shadow gap-5"
+    >
+      <div class="col-md-3">
+        <img
+          src="{% static 'img/restaurant_inside.jpg' %}"
+          class="custom-rounded img-fluid"
+          style="object-fit: cover"
+        />
+      </div>
+      <div class="col d-flex flex-column justify-content-evenly">
+        <h5 class="text-white">Little Lemon</h5>
+        <a href="" class="text-decoration-none text-white">Home</a>
+        <a href="" class="text-decoration-none text-white">Menu</a>
+        <a href="" class="text-decoration-none text-white">Book</a>
+        <a href="" class="text-decoration-none text-white">Order</a>
+        <a href="" class="text-decoration-none text-white">Login</a>
+      </div>
+      <div class="d-flex flex-column justify-content-evenly text-white">
+        <h5>Contact</h5>
+        <p>
+          Little Lemon 664 A Chicago LaSalle Street Chicago, Illinois 60602 USA
+        </p>
+        <p>+1 773 123 4567</p>
+        <p>contact@littlelemon.com</p>
+      </div>
+      <div class="col d-flex flex-column justify-content-evenly text-white">
+        <h5>Social Media</h5>
+        <a href="" class="text-decoration-none text-white">Instagram</a>
+        <a href="" class="text-decoration-none text-white">Facebook</a>
+        <a href="" class="text-decoration-none text-white">Twitter</a>
+        <a href="" class="text-decoration-none text-white">YouTube</a>
+      </div>
+    </article>
+  </div>
+  <article
+    class="container d-flex flex-column flex-md-row justify-content-center justify-content-md-between pt-4 text-shadow gap-2"
+  >
+    <span class="text-white text-center">
+      &copy; 2023 Little Lemon. All rights reserved.
+    </span>
+    <span class="text-white text-center"
+      >Developed with Python, Django and Bootstrap by Hernan Hawryluk</span
+    >
+  </article>
+</footer>

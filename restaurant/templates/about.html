@@ -1,0 +1,97 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<section class="custom-secondary">
+  <div class="container" style="height: 390px">
+    <div class="row">
+      <div
+        class="col col-md-6 d-flex flex-column justify-content-evenly text-shadow"
+        style="height: 340px; padding-top: 40px"
+      >
+        <h1 class="display-2 custom-primary primary-font">
+          <small>About us</small>
+        </h1>
+        <p class="text-white lead">
+          <small>
+            Based in Chicago, Illinois, Little Lemon is a family owned
+            Mediterranean restaurant, focused on traditional recipes served with
+            a modern twist.
+          </small>
+        </p>
+        <p class="text-white lead">
+          <small>
+            The chefs draw inspiration from Italian, Greek, and Turkish culture
+            and have a menu of 12-15 items that they rotate seasonally.
+          </small>
+        </p>
+      </div>
+      <div
+        class="col col-md-6 d-none d-md-flex justify-content-center mt-5 container-relative"
+        style="height: 320px"
+      >
+        <img
+          src="{% static 'img/hero.jpg' %}"
+          height="434px"
+          width="320px"
+          class="custom-rounded absolute container-absolute"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-padding">
+  <div class="container py-5">
+    <div
+      class="row row-cols-md-2 align-items-center justify-content-between gap-5 gap-md-0"
+    >
+      <div>
+        <img
+          src="{% static 'img/about-1.jpg' %}"
+          alt=""
+          class="custom-rounded img-fluid"
+        />
+      </div>
+      <div class="d-flex flex-column justify-content-evenly mt-4 py-5 lead">
+        <p class="pb-3">
+          The restaurant has a rustic and relaxed atmosphere with moderate
+          prices, making it a popular place for a meal any time of the day.
+        </p>
+        <p>
+          Little Lemon is owned by two Italian brothers, Mario and Adrian, who
+          moved to the United States to pursue their shared dream of owning a
+          restaurant.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-padding">
+  <div class="container py-5">
+    <div
+      class="row row-cols-md-2 align-items-center justify-content-between gap-5 gap-md-0"
+    >
+      <div class="d-flex flex-column justify-content-evenly mt-4 py-5 lead">
+        <p class="pb-3">
+          To craft the menu, Mario relies on family recipes and his experience
+          as a chef in Italy.
+        </p>
+        <p>
+          Adrian does all the marketing for the restaurant and led the effort to
+          expand the menu beyond classic Italian to incorporate additional
+          cuisines from the mediterranean region.
+        </p>
+      </div>
+      <div>
+        <img
+          src="{% static 'img/about-1.jpg' %}"
+          alt=""
+          class="custom-rounded img-fluid"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

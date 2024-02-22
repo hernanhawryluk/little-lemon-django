@@ -10,6 +10,7 @@ router.register(r"booking/tables", views.BookingViewSet, basename="Booking")
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('about/', views.about, name='about'),
 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('menu/', views.MenuItemsView.as_view()),

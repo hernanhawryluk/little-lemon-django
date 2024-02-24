@@ -17,9 +17,9 @@
             traditional recipes served with a modern twist.
           </small>
         </p>
-        <p class="mt-2">
+        <a href="{% url 'booking' %}" class="mt-2 text-decoration-none">
           <button class="custom-btn">Book a Table</button>
-        </p>
+        </a>
       </div>
       <div class="col-md-2"></div>
       <div
@@ -46,7 +46,7 @@
 
     <article class="card custom-rounded shadow main-card">
       <img
-        src="{% static 'img/head_chef.jpg' %}"
+        src="{% static 'img/opening_hours.jpg' %}"
         class="card-img-top custom-rounded-top"
         width="240px"
       />
@@ -75,9 +75,9 @@
           Our menu consists of 12-15 seasonal items based on Italian, Greek, and
           Turkish culture.
         </p>
-        <p class="d-flex justify-content-center pt-3">
-          <button class="custom-btn">See our new menu</button>
-        </p>
+        <a href="" class="d-flex justify-content-center pt-3 text-decoration-none">
+          <button class="custom-btn">Order Online</button>
+        </a>
       </div>
     </article>
 
@@ -93,9 +93,9 @@
           Reserve your table online for an Italian, Greek, and Turkish dining
           experience at our restaurant.
         </p>
-        <p class="d-flex justify-content-center pt-3">
+        <a href="{% url 'booking' %}" class="d-flex justify-content-center pt-3 text-decoration-none">
           <button class="custom-btn">Book a Table</button>
-        </p>
+        </a>
       </div>
     </article>
   </div>
@@ -119,9 +119,9 @@
           and led the effort to expand the menu beyond classic Italian to
           incorporate additional cuisines from the Mediterranean region.
         </p>
-        <p class="mt-3">
+        <a href="{% url 'about' %}" class="mt-3">
           <button class="custom-btn">More about us</button>
-        </p>
+        </a>
       </div>
       <div class="col container-relative" style="height: 440px;">
         <img

@@ -1,0 +1,83 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<section class="container section-margin">
+  {{ items }}
+    <div class="d-flex justify-content-between mb-3">
+      <h5 class="display-4 primary-font mb-4 text-shadow" style="font-weight: 600">
+        This Season Menu!
+      </h5>
+      <span class="mt-1">
+        <button class="custom-btn">Order a Delivery</button>
+      </span>
+    </div>
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-4">
+      <article class="card custom-rounded shadow secondary-card">
+        <img
+          src="{% static 'img/bruschetta.jpg' %}"
+          height="240px"
+          class="card-img-top custom-rounded-top"
+        />
+        <div class="card-body">
+          <h5 class="card-title mt-1">Bruschetta</h5>
+          <p class="card-text pt-1">
+            Our Bruschetta is made from grilled bread that has been smeared with garlic, seasoned with salt, and drizzled with olive oil, creating a delightful appetizer.
+          </p>
+          <p class="d-flex justify-content-center pt-2">
+            <button class="custom-btn">Add to Cart</button>
+          </p>
+        </div>
+      </article>
+
+      <article class="card custom-rounded shadow secondary-card">
+        <img
+          src="{% static 'img/greek-salad.jpg' %}"
+          height="240px"
+          class="card-img-top custom-rounded-top"
+        />
+        <div class="card-body">
+          <h5 class="card-title mt-1">Greek Salad</h5>
+          <p class="card-text pt-1">
+            The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese, garnished with crunchy garlic and rosemary croutons.
+          </p>
+          <p class="d-flex justify-content-center pt-2">
+            <button class="custom-btn">Add to Cart</button>
+          </p>
+        </div>
+      </article>
+
+      <article class="card custom-rounded shadow secondary-card">
+        <img
+          src="{% static 'img/grilled-fish.jpg' %}"
+          height="240px"
+          class="card-img-top custom-rounded-top"
+        />
+        <div class="card-body">
+          <h5 class="card-title mt-1">Greed Fish</h5>
+          <p class="card-text pt-1">
+            The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese, garnished with crunchy garlic and rosemary croutons.
+          </p>
+          <p class="d-flex justify-content-center pt-2">
+            <button class="custom-btn">Add to Cart</button>
+          </p>
+        </div>
+      </article>
+
+      <article class="card custom-rounded shadow secondary-card">
+        <img
+          src="{% static 'img/lemon-dessert.jpg' %}"
+          height="240px"
+          class="card-img-top custom-rounded-top"
+        />
+        <div class="card-body">
+          <h5 class="card-title mt-1">Lemon Dessert</h5>
+          <p class="card-text pt-1">
+            This comes straight from grandma’s cherished recipe book, every last ingredient has been sourced and is as authentic and nostalgic as can be imagined.
+          </p>
+          <span class="d-flex justify-content-center pt-2">
+            <button class="custom-btn">Add to Cart</button>
+          </span>
+        </div>
+      </article>
+    </section>
+
+{% endblock %}

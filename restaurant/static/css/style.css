@@ -16,6 +16,10 @@ body {
   font-style: normal;
 }
 
+.main-container {
+  min-height: calc(100vh - 420px);
+}
+
 .custom-bg {
   background-image: linear-gradient(
       0deg,
@@ -51,6 +55,57 @@ body {
 
 .custom-btn:hover {
   transform: scale(1.1);
+}
+
+.custom-btn:active {
+  transform: scale(0.9);
+}
+
+.order-btn {
+  background-color: #495e57;
+  border: none;
+  box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  height: 30px;
+  width: 120px;
+  text-shadow: 1px 1px 1.5px rgba(0, 0, 0, 0.2);
+  transition: 0.5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.order-btn:hover {
+  transform: scale(1.1);
+}
+
+.order-btn:active {
+  transform: scale(0.9);
+}
+
+.header-hover {
+  transition: 0.4s ease;
+}
+
+.header-hover:hover {
+  transform: scale(1.1);
+}
+
+.header-hover:active {
+  transform: scale(0.9);
+}
+
+.footer-hover {
+  transition: 0.4s ease;
+}
+
+.footer-hover:hover {
+  transform: scale(1.1) translate(7px);
+}
+
+.footer-hover:active {
+  transform: scale(0.9) translate(-7px);
 }
 
 .container-relative {
@@ -96,6 +151,8 @@ body {
   width: 260px;
   top: 0px;
   right: 60px;
+  object-fit: cover;
+  object-position: 60%;
 }
 
 .special-img-2 {
@@ -104,6 +161,8 @@ body {
   width: 260px;
   top: 80px;
   left: 90px;
+  object-fit: cover;
+  object-position: 70%;
 }
 
 .secondary-card {
@@ -111,7 +170,72 @@ body {
   width: 260px;
 }
 
-@media (max-width: 768px) {
+.padding-left {
+  padding-left: 50px;
+}
+
+.padding-right {
+  padding-right: 50px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+}
+
+input,
+select {
+  width: 100%;
+  display: block;
+  padding: 0.5rem 1rem;
+  line-height: 1.5rem;
+  box-sizing: border-box;
+}
+
+.appoint-btn {
+  margin-top: 16px;
+  padding: 0.5rem 1rem;
+  border: 1px solid #495e57;
+  background-color: #495e57;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 1.25rem;
+  display: block;
+  color: #fff;
+  line-height: 25px;
+}
+
+.section-container {
+  min-height: calc(100vh - 490px);
+}
+
+.auth-container {
+  width: 500px;
+}
+
+/* ---------- MOVIL MEDIA QUERIES ---------- */
+
+@media (max-width: 992px) {
+  .main-container {
+    min-height: calc(100vh - 140px);
+  }
+
+  .section-container {
+    min-height: calc(100vh - 190px);
+  }
+}
+
+@media (max-width: 425px) {
+  .custom-navbar {
+    margin-top: 30px;
+    margin-left: 46px;
+  }
+
+  .order-btn {
+    margin-bottom: 30px;
+    margin-left: -14px;
+  }
+
   .main-card {
     width: 90%;
     height: 100%;
@@ -133,5 +257,19 @@ body {
   .secondary-card {
     width: 90%;
     height: 100%;
+  }
+
+  .padding-left {
+    padding-left: 15px;
+    padding-top: 30px;
+  }
+
+  .padding-right {
+    padding-right: 15px;
+    padding-bottom: 30px;
+  }
+
+  .auth-container {
+    width: 95%;
   }
 }

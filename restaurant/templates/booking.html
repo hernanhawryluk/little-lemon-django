@@ -1,0 +1,106 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<section class="container my-5">
+  <div class="d-flex gap-5">
+    <div class="col card custom-rounded shadow p-5">
+      <h2 class="pb-4">Make a reservation</h2>
+      {% csrf_token %}
+      <form method="POST" id="form" class="d-flex flex-column gap-4">
+        <p>
+          <label for="booking_date">Reservation Date:</label>
+          <input
+            type="date"
+            id="booking_date"
+            value="{% now 'Y-m-d' %}"
+            style="border-radius: 10px; border-color: #495e57"
+          />
+        </p>
+
+        <p>
+          <label for="booking_time">Reservation Time:</label>
+          <select
+            id="booking_time"
+            style="
+              border-radius: 10px;
+              height: 46px;
+              border-width: 2px;
+              border-color: #495e57;
+              border-style: solid;
+            "
+          >
+            <option value="0" disabled>Select time</option>
+          </select>
+        </p>
+
+        <p>
+          <label for="booking_guests">Number of Guests:</label>
+          <select
+            id="booking_guests"
+            style="
+              border-radius: 10px;
+              height: 46px;
+              border-width: 2px;
+              border-color: #495e57;
+              border-style: solid;
+            "
+          >
+            <option value="0" disabled>Select guest count</option>
+            <option value="1">1 guest</option>
+            {% for i in range %}
+            <option value="{{ i }}">{{ i }} guests</option>
+            {% endfor %}
+          </select>
+        </p>
+
+        <p>
+          <label for="booking_occasion">Occasion:</label>
+          <select
+            id="booking_occasion"
+            style="
+              border-radius: 10px;
+              height: 46px;
+              border-width: 2px;
+              border-color: #495e57;
+              border-style: solid;
+            "
+          >
+            <option value="0" disabled>Select ocassion</option>
+            <option value="Casual">Casual</option>
+            <option value="Birthday">Birthday</option>
+            <option value="Anniversary">Anniversary</option>
+          </select>
+        </p>
+
+        <button
+          type="button"
+          class="appoint-btn"
+          id="button"
+          style="border-radius: 10px"
+        >
+          Reserve
+        </button>
+      </form>
+      <img
+        src="{% static 'img/restaurant_inside.jpg' %}"
+        class="img-fluid custom-rounded mt-5"
+        alt=""
+      />
+    </div>
+    <div class="col card custom-rounded shadow p-5">
+      <h2 class="pb-4">Bookings<span id="today"></span></h2>
+      <div id="bookings"></div>
+      <div>
+        <div class="card custom-rounded" style="height: 604px"></div>
+      </div>
+      <img
+        src="{% static 'img/restaurant_outside.jpg' %}"
+        class="img-fluid custom-rounded mt-5"
+        alt=""
+      />
+    </div>
+  </div>
+
+  <script src="{% static 'js/booking.js' %}"></script>
+</section>
+
+{% endblock %}

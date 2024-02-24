@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<section
+  class="container d-flex flex-column justify-content-center align-items-center section-container"
+>
+  <div class="shadow custom-rounded py-5 px-4 px-md-5 auth-container">
+    <h2 class="mb-3">Login</h2>
+
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <div>
+        {%if error%}
+        <div class="alert alert-danger" role="alert">{{error}}</div>
+        {% endif %}
+      </div>
+      <p class="d-flex justify-content-center pt-3">
+        <button type="submit" class="custom-btn">Login</button>
+      </p>
+    </form>
+    <p class="text-center pt-3">
+      Don't have an account? <a href="{% url 'register' %}">Register</a>
+    </p>
+  </div>
+</section>
+
+{% endblock %}

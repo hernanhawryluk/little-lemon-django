@@ -1,18 +1,20 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
-class Booking(models.Model):
-    name = models.CharField(max_length = 255)
-    no_of_guests = models.IntegerField()
-    booking_date = models.DateField()
 
-    def __str__(self) -> str:
-        return f'{self.name} booked {self.no_of_guests} on {self.booking_date}'
+class Customer(models.Model):
+    first_name = models.CharField(max_length = 30)
+    last_name = models.CharField(max_length = 30)
+    phone = models.CharField(max_length = 30, db_index = True)
+    address = models.CharField(max_length = 255)
+    email = models.EmailField(max_length = 255, db_index = True)
 
-class Menu(models.Model):
-    title = models.CharField(max_length = 255, db_index = True)
-    price = models.DecimalField(max_digits = 10, decimal_places = 2, db_index = True)
-    inventory = models.IntegerField()
+class OpeningHours(models.Model):
+    days = models.CharField(max_length = 12)
+    opening_hour = models.CharField(max_length = 6)
+    closing_hour = models.CharField(max_length = 6)
 
     def __str__(self):
-        return f'{self.title} : {str(self.price)}'
+        return f'{self.days}: {self.opening_hour} - {self.closing_hour}'
+

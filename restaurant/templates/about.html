@@ -4,7 +4,7 @@
   <div class="container" style="height: 390px">
     <div class="row">
       <div
-        class="col col-md-6 d-flex flex-column justify-content-evenly text-shadow"
+        class="col col-md-6 d-flex flex-column justify-content-evenly text-shadow padding-right"
         style="height: 340px; padding-top: 40px"
       >
         <h1 class="display-2 custom-primary primary-font">
@@ -42,9 +42,7 @@
 
 <section class="section-padding">
   <div class="container py-5">
-    <div
-      class="row row-cols-md-2 align-items-center justify-content-between gap-5 gap-md-0"
-    >
+    <div class="row row-cols-md-2 align-items-center justify-content-between">
       <div>
         <img
           src="{% static 'img/about-1.jpg' %}"
@@ -52,7 +50,7 @@
           class="custom-rounded img-fluid"
         />
       </div>
-      <div class="d-flex flex-column justify-content-evenly mt-4 py-5 lead">
+      <div class="d-flex flex-column justify-content-evenly lead padding-left">
         <p class="pb-3">
           The restaurant has a rustic and relaxed atmosphere with moderate
           prices, making it a popular place for a meal any time of the day.
@@ -67,12 +65,12 @@
   </div>
 </section>
 
-<section class="section-padding">
+<section class="section-padding custom-secondary">
   <div class="container py-5">
-    <div
-      class="row row-cols-md-2 align-items-center justify-content-between gap-5 gap-md-0"
-    >
-      <div class="d-flex flex-column justify-content-evenly mt-4 py-5 lead">
+    <div class="row row-cols-md-2 align-items-center justify-content-between">
+      <div
+        class="d-flex flex-column justify-content-evenly lead text-white padding-right"
+      >
         <p class="pb-3">
           To craft the menu, Mario relies on family recipes and his experience
           as a chef in Italy.
@@ -85,10 +83,32 @@
       </div>
       <div>
         <img
-          src="{% static 'img/about-1.jpg' %}"
+          src="{% static 'img/about-3.jpg' %}"
           alt=""
           class="custom-rounded img-fluid"
         />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-padding">
+  <div class="container py-5">
+    <div class="row row-cols-md-2 align-items-center justify-content-between">
+      <div>
+        <img
+          src="{% static 'img/about-4.jpg' %}"
+          alt=""
+          class="custom-rounded img-fluid"
+        />
+      </div>
+      <div class="d-flex flex-column justify-content-evenly lead padding-left">
+        <p class="pb-3">
+          Join us at Little Lemon, where every dish is a journey through the
+          flavors of the Mediterranean, inviting you to savor the essence of our
+          shared passion for exceptional cuisine.
+        </p>
+        <button class="custom-btn">Reserve a Table</button>
       </div>
     </div>
   </div>

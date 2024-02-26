@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from items.models import Item
-from .forms import NewUserForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-from .forms import CustomAuthenticationForm
+from .forms import CustomUserCreationForm, CustomAuthenticationForm
+from django.db import IntegrityError
 
 
 # Create your views here.
@@ -18,39 +20,47 @@ def menu(request):
     items = Item.objects.all()
     return render(request, 'menu.html', {'items': items })
 
-def booking(request):
-    return render(request, 'booking.html', {'range': range(2, 13)})
-
-def register(request):
+def signup_view(request):
+    error = None
     if request.method == "POST":
-        form = NewUserForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            messages.success(request, "Registration successful." )
-        messages.error(request, "Unsuccessful registration. Invalid information.")
+        if request.POST['password1'] == request.POST['password2']:
+            try:
+                user = User.objects.create_user(username=request.POST['username'], email=request.POST['email'], password=request.POST['password1'])
+                user.save()
+                login(request, user)
+                return redirect('booking')
+            except IntegrityError:
+                error = 'Username already exists'
+            except:
+                error = 'Something went wrong'
+        else:
+            error = 'Passwords do not match'
+            
+    form = CustomUserCreationForm()
+    return render(request, 'register.html', {'form': form, 'error': error})
 
-    form = NewUserForm()
-    return render(request, 'register.html', {'form': form})
+        # form = NewUserForm(request.POST)
+        # if form.is_valid():
+        #     user = form.save()
+        #     login(request, user)
+        #     messages.success(request, "Registration successful." )
+        # messages.error(request, "Unsuccessful registration. Invalid information.")
+    
 
 def login_view(request):
     error = None
     if request.method == 'POST':
         form = CustomAuthenticationForm(request, data = request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username = username, password = password)
-            if user is not None:
-                login(request, user)
-                messages.info(request, f"You are now logged in as {username}.")
-                return redirect('booking')
-            else:
-                messages.error(request, "Invalid username or password.")
-                error = "Invalid username or password."
-
-        else:
-            messages.error(request, "Invalid username or password.")
+        user = authenticate(username = request.POST['username'], password = request.POST['password'])
+        if user is None:
             error = "Invalid username or password."
+        else:
+            login(request, user)
+            return redirect('booking')
+
     form = CustomAuthenticationForm()
     return render(request, 'login.html', {'form': form, 'error': error})
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')

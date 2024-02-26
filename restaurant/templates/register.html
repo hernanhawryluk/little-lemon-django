@@ -4,11 +4,13 @@
 >
   <div class="shadow custom-rounded py-5 px-4 px-md-5 auth-container">
     <h2 class="mb-3">Register</h2>
-    <p>{{form.errors}}</p>
-    <form method="post" action="{% url 'login' %}">
+    {%if error%}
+    <div class="alert alert-danger" role="alert">{{error}}</div>
+    {% endif %}
+    <form method="post">
       {% csrf_token %} {{ form }}
       <p class="d-flex justify-content-center pt-3">
-        <button type="submit" class="custom-btn">Login</button>
+        <button type="submit" class="custom-btn">Register</button>
       </p>
     </form>
     <p class="text-center">

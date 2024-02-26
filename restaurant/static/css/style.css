@@ -1,3 +1,12 @@
+/* ------ VARIABLES ----- */
+
+:root {
+  --primary-color: #f4ce14;
+  --secondary-color: #495e57;
+  --primary-font: "Markazi Text", serif;
+  --secondary-font: "Karla", sans-serif;
+}
+
 body {
   font-family: "Karla", sans-serif;
 }
@@ -35,15 +44,15 @@ body {
 }
 
 .custom-primary {
-  color: #f4ce14;
+  color: var(--primary-color);
 }
 
 .custom-secondary {
-  background-color: #495e57;
+  background-color: var(--secondary-color);
 }
 
 .custom-btn {
-  background-color: #f4ce14;
+  background-color: var(--primary-color);
   border: none;
   box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 15px;
@@ -62,7 +71,7 @@ body {
 }
 
 .order-btn {
-  background-color: #495e57;
+  background-color: var(--secondary-color);
   border: none;
   box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 15px;
@@ -187,22 +196,44 @@ input,
 select {
   width: 100%;
   display: block;
-  padding: 0.5rem 1rem;
+  padding: 0.7rem 1rem;
   line-height: 1.5rem;
   box-sizing: border-box;
+  border: 1px solid var(--secondary-color);
+  border-radius: 10px;
+  margin-top: 4px;
+}
+
+select {
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("../img/down-arrow.svg");
+  background-size: 24px;
+  background-repeat: no-repeat;
+  background-position: calc(100% - 8px) center;
 }
 
 .appoint-btn {
-  margin-top: 16px;
-  padding: 0.5rem 1rem;
-  border: 1px solid #495e57;
-  background-color: #495e57;
-  border-radius: 5px;
+  margin-top: 36px;
+  padding: 0.7rem 0;
+  border: 1px solid var(--secondary-color);
+  background-color: var(--secondary-color);
+  border-radius: 10px;
   width: 100%;
   font-size: 1.25rem;
   display: block;
   color: #fff;
   line-height: 25px;
+  transition: 0.5s ease;
+}
+
+.appoint-btn:hover {
+  transform: scale(1.05);
+  background-color: var(--secondary-color);
+}
+
+.appoint-btn:active {
+  transform: scale(0.9);
 }
 
 .section-container {
@@ -211,6 +242,17 @@ select {
 
 .auth-container {
   width: 500px;
+}
+
+.divider {
+  width: 70%;
+  height: 1.2px;
+  background-color: var(--secondary-color);
+}
+
+.custom-border {
+  border: 1px solid rgba(73, 94, 87, 0.6);
+  border-radius: 15px;
 }
 
 /* ---------- MOVIL MEDIA QUERIES ---------- */

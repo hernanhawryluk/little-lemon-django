@@ -1,0 +1,59 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<section class="container my-5">
+  <div class="d-flex gap-5">
+    <div class="col card custom-border shadow p-5">
+      <h2 class="pb-4">Make a reservation</h2>
+      {% if errors%}
+      <div class="alert alert-danger" role="alert">{{ errors }}</div>
+      {% endif %}
+      <form method="POST" action="{% url 'booking' %}">
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit" class="appoint-btn" id="button">Book</button>
+      </form>
+      <img
+        src="{% static 'img/restaurant_inside.jpg' %}"
+        class="img-fluid custom-rounded mt-5"
+        alt=""
+      />
+    </div>
+
+    <div class="col card custom-border shadow p-5">
+      <h2 class="pb-4">Bookings<span id="today"></span></h2>
+      <div id="bookings"></div>
+      <div
+        class="custom-rounded mt-4"
+        style="height: 416px; border: 1px solid #495e57; overflow: hidden"
+      >
+        <div class="p-4" style="overflow-y: auto">
+          {% for book in bookings %}
+          <article class="pb-4 d-flex flex-column align-items-center pt-3">
+            <p>Appointed as: <strong>{{ book.user.username }}</strong></p>
+            <p>
+              On <strong>{{ book.date }}</strong> at
+              <strong>{{ book.time }}</strong>
+            </p>
+            <p>
+              Booked for <strong>{{ book.guests }}</strong>
+              {% if book.guests == 1 %} guest. {% else %} guests. {% endif %}
+            </p>
+            <p>
+              The occasion is a <strong>{{ book.occasion }}</strong> meeting.
+            </p>
+            <div class="divider mt-2"></div>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+      <img
+        src="{% static 'img/restaurant_outside.jpg' %}"
+        class="img-fluid custom-rounded mt-5"
+        alt=""
+      />
+    </div>
+  </div>
+
+  <script src="{% static 'js/booking.js' %}"></script>
+</section>
+
+{% endblock %}

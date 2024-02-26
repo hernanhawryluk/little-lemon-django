@@ -34,7 +34,11 @@
           </a>
         </li>
         <li class="nav-item order-btn">
-          <a href="#" class="nav-link text-white">Order Online</a>
+          {% if user.is_authenticated %}
+          <a href="/logout" class="nav-link text-white">Logout</a>
+          {% else %}
+          <a href="/login" class="nav-link text-white">Login</a>
+          {% endif %}
         </li>
       </ul>
     </div>

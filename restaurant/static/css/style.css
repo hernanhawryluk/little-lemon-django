@@ -70,6 +70,41 @@ body {
   transform: scale(0.9);
 }
 
+.small-btn-edit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
+  color: #000;
+  border: none;
+  box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  height: 30px;
+  width: 110px;
+  text-shadow: 1px 1px 1.5px rgba(0, 0, 0, 0.2);
+  cursor: default;
+}
+
+.small-btn {
+  background-color: var(--secondary-color);
+  color: #fff;
+  border: none;
+  box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  height: 30px;
+  width: 110px;
+  text-shadow: 1px 1px 1.5px rgba(0, 0, 0, 0.2);
+  transition: 0.5s ease;
+}
+
+.small-btn:hover {
+  transform: scale(1.1);
+}
+
+.small-btn:active {
+  transform: scale(0.9);
+}
+
 .order-btn {
   background-color: var(--secondary-color);
   border: none;
@@ -175,7 +210,7 @@ body {
 }
 
 .secondary-card {
-  height: 540px;
+  height: 486px;
   width: 260px;
 }
 

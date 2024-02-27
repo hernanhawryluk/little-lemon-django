@@ -1,69 +1,66 @@
 {% load static %}
 <footer class="custom-secondary section-padding">
   <div class="container pt-5">
-    <article
-      class="row row-cols-1 row-cols-md-6 justify-content-between text-shadow gap-5"
-    >
+    <div class="d-flex flex-column flex-md-row gap-5">
       <div class="col-md-3">
         <img
           src="{% static 'img/restaurant_inside.jpg' %}"
           class="custom-rounded img-fluid"
           style="object-fit: cover"
         />
-      </div>
-      <div class="col d-flex flex-column justify-content-evenly">
-        <h5 class="text-white">Little Lemon</h5>
-        <a
-          href="{% url 'home' %}"
-          class="text-decoration-none text-white footer-hover"
-          >Home</a
-        >
-        <a
-          href="{% url 'about' %}"
-          class="text-decoration-none text-white footer-hover"
-        >
-          About
-        </a>
-        <a
-          href="{% url 'menu' %}"
-          class="text-decoration-none text-white footer-hover"
-        >
-          Menu
-        </a>
-        <a
-          href="{% url 'booking' %}"
-          class="text-decoration-none text-white footer-hover"
-        >
-          Booking
-        </a>
-        <a href="" class="text-decoration-none text-white footer-hover">
-          Order Online
-        </a>
-      </div>
-      <div class="d-flex flex-column justify-content-evenly text-white">
-        <h5>Contact</h5>
-        <p>
-          Little Lemon 664 A Chicago LaSalle Street Chicago, Illinois 60602 USA
-        </p>
-        <p>+1 773 123 4567</p>
-        <p>contact@littlelemon.com</p>
-      </div>
-      <div class="col d-flex flex-column justify-content-evenly text-white">
-        <h5>Social Media</h5>
-        <a href="" class="text-decoration-none text-white footer-hover"
-          >Instagram</a
-        >
-        <a href="" class="text-decoration-none text-white footer-hover"
-          >Facebook</a
-        >
-        <a href="" class="text-decoration-none text-white footer-hover"
-          >Twitter</a
-        >
-        <a href="" class="text-decoration-none text-white footer-hover"
-          >YouTube</a
-        >
-      </div>
-    </article>
+      <article
+        class="row row-cols-1 row-cols-md-6 justify-content-between align-items-start text-shadow gap-5"
+      >
+        </div>
+        <div class="col d-flex flex-column justify-content-evenly">
+          <h5 class="text-white">Little Lemon</h5>
+          <a
+            href="{% url 'home' %}"
+            class="text-decoration-none text-white footer-hover"
+            >Home</a
+          >
+          <a
+            href="{% url 'about' %}"
+            class="text-decoration-none text-white footer-hover"
+          >
+            About
+          </a>
+          <a
+            href="{% url 'menu' %}"
+            class="text-decoration-none text-white footer-hover"
+          >
+            Menu
+          </a>
+          <a
+            href="{% url 'booking' %}"
+            class="text-decoration-none text-white footer-hover"
+          >
+            Booking
+          </a>
+        </div>
+        <div class="d-flex flex-column justify-content-evenly text-white">
+          <h5 class="mt-md-1">Contact</h5>
+          <p>Little Lemon, LaSalle Street 664 Chicago, Illinois 60602 USA</p>
+          <p>+1 773 123 4567</p>
+          <p>contact@littlelemon.com</p>
+        </div>
+        <div class="col d-flex flex-column justify-content-evenly text-white">
+          <h5>Social Media</h5>
+          <a href="" class="text-decoration-none text-white footer-hover"
+            >Instagram</a
+          >
+          <a href="" class="text-decoration-none text-white footer-hover"
+            >Facebook</a
+          >
+          <a href="" class="text-decoration-none text-white footer-hover"
+            >Twitter</a
+          >
+          <a href="" class="text-decoration-none text-white footer-hover"
+            >YouTube</a
+          >
+        </div>
+      </article>
+    </div>
   </div>
   <article
     class="container d-flex flex-column flex-md-row justify-content-center justify-content-md-between pt-4 text-shadow gap-2"

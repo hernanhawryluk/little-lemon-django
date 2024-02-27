@@ -290,6 +290,15 @@ select {
   border-radius: 15px;
 }
 
+.custom-gradient {
+  background: linear-gradient(to bottom, #495e57, #ffffff);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+}
+
 /* ---------- MOVIL MEDIA QUERIES ---------- */
 
 @media (max-width: 992px) {

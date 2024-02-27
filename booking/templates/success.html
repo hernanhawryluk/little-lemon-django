@@ -1,7 +1,40 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
-<section>
-  <h2></h2>
+<div class="custom-gradient" style="height: 500px"></div>
+<section
+  class="container d-flex flex-column justify-content-center align-items-center section-container pt-4"
+>
+  <div
+    class="shadow custom-rounded py-5 px-4 px-md-5 auth-container custom-border"
+    style="background-color: #fff"
+  >
+    <h2 class="mb-3">Successfully booked</h2>
+    <p class="pb-2" style="font-weight: 500; line-height: 1.6rem">
+      Thank you for choosing Little Lemon! We appreciate your reservation and
+      look forward to serving you.
+    </p>
+    <div
+      class="custom-rounded p-4"
+      style="height: 200px; border: 1px solid #495e57; overflow: hidden"
+    >
+      <p>Appointed as: <strong>{{ booking.user.username }}</strong></p>
+      <p>
+        On <strong>{{ booking.date }}</strong> at
+        <strong>{{ booking.time }}</strong>
+      </p>
+      <p>
+        Booked for <strong>{{ booking.guests }}</strong>
+        {% if booking.guests == 1 %} guest. {% else %} guests. {% endif %}
+      </p>
+      <p>The occasion is a <strong>{{ booking.occasion }}</strong> meeting.</p>
+    </div>
+
+    <div class="d-flex justify-content-center pt-4">
+      <a href="{% url 'booking' %}">
+        <button class="custom-btn" style="font-weight: 500">Go back</button>
+      </a>
+    </div>
+  </div>
 </section>
 
 {% endblock %}

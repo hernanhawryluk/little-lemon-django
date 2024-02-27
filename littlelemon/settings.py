@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'restaurant',
     'items',
     'booking',
-    'cart',
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',

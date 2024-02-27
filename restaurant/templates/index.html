@@ -75,8 +75,8 @@
           Our menu consists of 12-15 seasonal items based on Italian, Greek, and
           Turkish culture.
         </p>
-        <a href="" class="d-flex justify-content-center pt-3 text-decoration-none">
-          <button class="custom-btn">Order Online</button>
+        <a href="{% url 'menu' %}" class="d-flex justify-content-center pt-3 text-decoration-none">
+          <button class="custom-btn">Browse Menu</button>
         </a>
       </div>
     </article>
@@ -145,7 +145,9 @@
       This week specials!
     </h5>
     <span class="mt-1">
-      <button class="custom-btn">Order a Delivery</button>
+      <a href="{% url 'menu' %}">
+        <button class="custom-btn">Discover selections</button>
+      </a>
     </span>
   </div>
   <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-4">

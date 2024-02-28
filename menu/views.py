@@ -4,5 +4,5 @@ from . models import Menu
 # Create your views here.
 
 def menu(request):
-    items = Menu.objects.all()
-    return render(request, 'menu.html', {'items': items })
+    menus = Menu.objects.all()
+    return render(request, 'menu.html', {'menus': menus })

@@ -2,40 +2,33 @@
 
 <div class="custom-gradient" style="height: 500px"></div>
 <section class="container pt-5 mb-5">
-  <div class="d-flex gap-5">
-    <div class="col card custom-border shadow p-5">
-      {% if editing %}
-      <h2 class="pb-4">Edit booking</h2>
-      {% else %}
+  <div class="d-flex flex-column flex-md-row gap-5">
+    <div class="col card custom-border shadow px-4 py-5 p-md-5">
       <h2 class="pb-4">Make a reservation</h2>
-      {% endif %} {% if errors%}
+      {% if errors %}
       <div class="alert alert-danger" role="alert">{{ errors }}</div>
-      {% endif %} {% if editing %}
-      <form method="POST">
-        {% csrf_token %} {{ form.as_p }}
-        <button type="submit" class="appoint-btn" id="button">Save</button>
-      </form>
-      {% else %}
+      {% endif %}
       <form method="POST">
         {% csrf_token %} {{ form.as_p }}
         <button type="submit" class="appoint-btn" id="button">Book</button>
       </form>
-      {% endif %}
       <img
         src="{% static 'img/restaurant_inside.jpg' %}"
-        class="img-fluid custom-rounded mt-5"
+        class="img-fluid custom-rounded mt-5 d-none d-md-block"
         alt=""
       />
     </div>
 
-    <div class="col card custom-border shadow p-5">
-      <h2 class="pb-4">Bookings<span id="today"></span></h2>
-      <div id="bookings"></div>
+    <div class="col card custom-border shadow p-4 p-md-5 py-5">
+      <h2 class="pb-3 pb-md-4">Bookings</h2>
       <div
-        class="custom-rounded mt-4"
+        class="custom-rounded mt-3 mt-md-4"
         style="height: 416px; border: 1px solid #495e57; overflow: hidden"
       >
-        <div class="p-4" style="overflow-y: auto; height: 100%; width: 100%">
+        <div
+          class="p-2 p-md-4 text-center"
+          style="overflow-y: auto; height: 100%; width: 100%"
+        >
           {% for book in bookings %}
           <article class="pb-4 d-flex flex-column align-items-center pt-3">
             <p>Appointed as: <strong>{{ book.user.username }}</strong></p>
@@ -51,21 +44,12 @@
               The occasion is a <strong>{{ book.occasion }}</strong> meeting.
             </p>
             <div class="d-flex gap-3 mb-3">
-              {% if editing == book.pk %}
-              <div class="small-btn-edit">Editing</div>
-              {% else %}
               <a href="{% url 'edit_booking' book.pk %}">
                 <button class="small-btn">Edit</button>
               </a>
-              {% endif %} {% if editing == book.pk %}
-              <a href="{% url 'booking' %}">
+              <a href="{% url 'delete_booking' book.pk %}">
                 <button class="small-btn">Cancel</button>
               </a>
-              {% else %}
-              <a href="{% url 'delete_booking' book.pk %}">
-                <button class="small-btn">Delete</button>
-              </a>
-              {% endif %}
             </div>
             <div class="divider mt-2"></div>
           </article>
@@ -74,7 +58,7 @@
       </div>
       <img
         src="{% static 'img/restaurant_outside.jpg' %}"
-        class="img-fluid custom-rounded mt-5"
+        class="img-fluid custom-rounded mt-5 d-none d-md-block"
         alt=""
       />
     </div>

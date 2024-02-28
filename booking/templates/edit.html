@@ -7,8 +7,10 @@
   <div
     class="shadow custom-rounded py-5 px-4 px-md-5 auth-container custom-border"
   >
-    <h2 class="mb-3">Login</h2>
-
+    <h2 class="mb-3">Booking details update</h2>
+    {% if errors%}
+    <div class="alert alert-danger" role="alert">{{ errors }}</div>
+    {% endif %}
     <form method="post">
       {% csrf_token %} {{ form.as_p }}
       <div>
@@ -16,13 +18,16 @@
         <div class="alert alert-danger" role="alert">{{error}}</div>
         {% endif %}
       </div>
-      <p class="d-flex justify-content-center pt-3">
-        <button type="submit" class="custom-btn">Login</button>
-      </p>
+      <div
+        class="d-flex flex-column flex-md-row align-items-center gap-3 mt-4 py-1 py-md-3"
+      >
+        <button type="submit" class="custom-btn">Apply changes</button>
+
+        <a href="{% url 'booking' %}">
+          <button class="custom-btn">Go back</button>
+        </a>
+      </div>
     </form>
-    <p class="text-center pt-3">
-      Don't have an account? <a href="{% url 'register' %}">Register</a>
-    </p>
   </div>
 </section>
 

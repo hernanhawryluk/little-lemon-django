@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from items.models import Item
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
@@ -15,10 +14,6 @@ def home(request):
 
 def about(request):
     return render(request, 'about.html', {})
-
-def menu(request):
-    items = Item.objects.all()
-    return render(request, 'menu.html', {'items': items })
 
 def signup_view(request):
     error = None

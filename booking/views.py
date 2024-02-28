@@ -43,7 +43,7 @@ def edit_booking_view(request, pk):
         form = BookingForm(instance=booking)
         bookings = Booking.objects.filter(user=request.user, date__gte=datetime.now().date()).exclude(pk=pk).order_by('date', 'time')
         ordered_bookings = [booking] + list(bookings)
-        return render(request, 'booking.html', {'form': form, 'errors': errors, 'bookings': ordered_bookings, 'editing': pk})
+        return render(request, 'edit.html', {'form': form, 'errors': errors, 'bookings': ordered_bookings, 'editing': pk})
     
     if request.method == 'POST':
         if booking.user == request.user:
@@ -57,7 +57,7 @@ def edit_booking_view(request, pk):
                 errors = 'Please provide valid data'
             except:
                 errors = 'Something went wrong'
-            return render(request, 'booking.html', {'form': form, 'errors': errors, 'bookings': bookings, 'editing': pk})
+            return render(request, 'edit.html', {'form': form, 'errors': errors, 'bookings': bookings, 'editing': pk})
         
 def delete_booking_view(request, pk):
     booking = get_object_or_404(Booking, pk=pk, user=request.user)

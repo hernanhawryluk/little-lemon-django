@@ -5,15 +5,14 @@
   class="container d-flex flex-column justify-content-center align-items-center section-container"
 >
   <div
-    class="shadow custom-rounded py-5 px-4 px-md-5 auth-container"
-    style="background-color: #fff"
+    class="shadow custom-rounded py-5 px-4 px-md-5 auth-container custom-border"
   >
     <h2 class="mb-3">Cancel booking</h2>
     <p>The following reservation is going to be cancelled</p>
 
     <div
-      class="custom-rounded p-4"
-      style="height: 156px; border: 1px solid #495e57; overflow: hidden"
+      class="custom-rounded p-4 pb-2"
+      style="border: 1px solid #495e57; overflow: hidden"
     >
       <p>
         <strong>{{ booking.date }}</strong> at
@@ -26,24 +25,21 @@
       <p>The occasion is a <strong>{{ booking.occasion }}</strong> meeting.</p>
     </div>
 
-    <div class="d-flex gap-3 pt-4">
+    <div
+      class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3 pt-4"
+    >
       <form method="POST">
         {% csrf_token %}
         <button
           type="submit"
           class="custom-btn"
-          style="background-color: #dc3545; color: #fff; font-weight: 500"
+          style="background-color: #d32f2f; color: #fff; font-weight: 600"
         >
           Cancel booking
         </button>
       </form>
       <a href="{% url 'booking' %}">
-        <button
-          class="custom-btn"
-          style="background-color: #495e57; color: #fff; font-weight: 500"
-        >
-          Go back
-        </button>
+        <button class="custom-btn" style="font-weight: 500">Go back</button>
       </a>
     </div>
   </div>

@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'restaurant',
-    'items',
+    'menu',
     'booking',
     'rest_framework',
     'rest_framework.authtoken',
@@ -159,3 +159,6 @@ DJOSER = {
 }
 
 LOGIN_URL = '/login/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

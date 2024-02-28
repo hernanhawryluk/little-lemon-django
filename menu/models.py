@@ -15,15 +15,14 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
 
 
-class Item(models.Model):
+class Menu(models.Model):
     category = models.ForeignKey('Category', on_delete = models.PROTECT)
     name = models.CharField(max_length = 50, db_index = True)
     slug = models.SlugField(max_length = 50, db_index = True)
     description = models.TextField(max_length = 255)
-    image = models.CharField(max_length = 255)
+    image = models.ImageField(upload_to='images/')
     price = models.DecimalField(max_digits = 10, decimal_places = 2, db_index = True)
     stock = models.BooleanField(default = True)
-    featured = models.BooleanField(default = False)
     created = models.DateTimeField(auto_now_add = True)
     updated = models.DateTimeField(auto_now = True)
 
@@ -32,5 +31,5 @@ class Item(models.Model):
 
     class Meta:
         ordering = ['name']
-        verbose_name = 'Item'
-        verbose_name_plural = 'Items'
+        verbose_name = 'Menu'
+        verbose_name_plural = 'Menus'

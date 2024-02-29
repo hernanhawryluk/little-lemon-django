@@ -28,6 +28,16 @@ class Menu(models.Model):
     created = models.DateTimeField(auto_now_add = True)
     updated = models.DateTimeField(auto_now = True)
 
+    def average_rating(self):
+        reviews = self.review_set.all()
+        if reviews:
+            total_rating = sum([review.rating for review in reviews])
+            return total_rating / len(reviews)
+        return 0
+    
+    def total_reviews(self):
+        return self.review_set.count()
+
     def __str__(self):
         return f'{self.name} : {str(self.price)}'
 
@@ -38,7 +48,7 @@ class Menu(models.Model):
 
 class Review(models.Model):
     menu = models.ForeignKey('Menu', on_delete = models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
     rating = models.IntegerField()
     comment = models.TextField()
     created = models.DateTimeField(auto_now_add = True)

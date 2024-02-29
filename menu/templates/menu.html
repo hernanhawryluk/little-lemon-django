@@ -21,17 +21,22 @@
     class="d-flex flex-wrap flex-column flex-md-row justify-content-evenly align-items-center gap-4"
   >
     {% for menu in menus %}
-    <article class="card custom-rounded shadow secondary-card custom-border">
-      <img
-        src="{{ menu.image.url }}"
-        style="aspect-ratio: 3/2.5"
-        class="card-img-top custom-rounded-top"
-      />
-      <div class="card-body">
-        <h5 class="card-title mt-1">{{ menu.name }}</h5>
-        <p class="card-text pt-1">{{ menu.description }}</p>
-      </div>
-    </article>
+    <a
+      href="{% url 'item' pk=menu.pk %}"
+      class="text-decoration-none custom-hover"
+    >
+      <article class="card custom-rounded shadow secondary-card custom-border">
+        <img
+          src="{{ menu.image.url }}"
+          style="aspect-ratio: 3/2.5"
+          class="card-img-top custom-rounded-top"
+        />
+        <div class="card-body">
+          <h5 class="card-title mt-1">{{ menu.name }}</h5>
+          <p class="card-text pt-1">{{ menu.description }}</p>
+        </div>
+      </article>
+    </a>
     {% endfor %}
   </div>
 </section>
@@ -57,17 +62,24 @@
       class="d-flex flex-wrap flex-column flex-md-row justify-content-evenly align-items-center gap-4"
     >
       {% for drink in drinks %}
-      <article class="card custom-rounded shadow secondary-card custom-border">
-        <img
-          src="{{ drink.image.url }}"
-          style="aspect-ratio: 3/2.5"
-          class="card-img-top custom-rounded-top"
-        />
-        <div class="card-body">
-          <h5 class="card-title mt-1">{{ drink.name }}</h5>
-          <p class="card-text pt-1">{{ drink.description }}</p>
-        </div>
-      </article>
+      <a
+        href="{% url 'item' pk=drink.pk %}"
+        class="text-decoration-none custom-hover"
+      >
+        <article
+          class="card custom-rounded shadow secondary-card custom-border"
+        >
+          <img
+            src="{{ drink.image.url }}"
+            style="aspect-ratio: 3/2.5"
+            class="card-img-top custom-rounded-top"
+          />
+          <div class="card-body">
+            <h5 class="card-title mt-1">{{ drink.name }}</h5>
+            <p class="card-text pt-1">{{ drink.description }}</p>
+          </div>
+        </article>
+      </a>
       {% endfor %}
     </div>
   </div>
@@ -94,17 +106,24 @@
       class="d-flex flex-wrap flex-column flex-md-row justify-content-evenly align-items-center gap-4"
     >
       {% for dessert in desserts %}
-      <article class="card custom-rounded shadow secondary-card custom-border">
-        <img
-          src="{{ dessert.image.url }}"
-          style="aspect-ratio: 3/2.5"
-          class="card-img-top custom-rounded-top"
-        />
-        <div class="card-body">
-          <h5 class="card-title mt-1">{{ dessert.name }}</h5>
-          <p class="card-text pt-1">{{ dessert.description }}</p>
-        </div>
-      </article>
+      <a
+        href="{% url 'item' pk=dessert.pk %}"
+        class="text-decoration-none custom-hover"
+      >
+        <article
+          class="card custom-rounded shadow secondary-card custom-border"
+        >
+          <img
+            src="{{ dessert.image.url }}"
+            style="aspect-ratio: 3/2.5"
+            class="card-img-top custom-rounded-top"
+          />
+          <div class="card-body">
+            <h5 class="card-title mt-1">{{ dessert.name }}</h5>
+            <p class="card-text pt-1">{{ dessert.description }}</p>
+          </div>
+        </article>
+      </a>
       {% endfor %}
     </div>
   </div>

@@ -1,5 +1,7 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 # Create your models here.
 
 class Category(models.Model):
@@ -33,3 +35,19 @@ class Menu(models.Model):
         ordering = ['name']
         verbose_name = 'Menu'
         verbose_name_plural = 'Menus'
+
+class Review(models.Model):
+    menu = models.ForeignKey('Menu', on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.IntegerField()
+    comment = models.TextField()
+    created = models.DateTimeField(auto_now_add = True)
+    updated = models.DateTimeField(auto_now = True)
+
+    def __str__(self):
+        return f'{self.user} : {self.rating}'
+
+    class Meta:
+        ordering = ['rating']
+        verbose_name = 'Review'
+        verbose_name_plural = 'Reviews'

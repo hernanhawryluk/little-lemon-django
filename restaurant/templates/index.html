@@ -42,9 +42,10 @@
   <h2 class="display-4 primary-font mb-4 text-shadow" style="font-weight: 600">
     Discover our restaurant!
   </h2>
-  <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-5">
-
-    <article class="card custom-rounded shadow main-card">
+  <div
+    class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-5"
+  >
+    <article class="card custom-rounded shadow main-card custom-border">
       <img
         src="{% static 'img/opening_hours.webp' %}"
         class="card-img-top custom-rounded-top"
@@ -53,17 +54,18 @@
       <div class="card-body">
         <h4 class="card-title mt-1">Opening Hours</h4>
         <p class="card-text pt-1">
-          The Little Lemon Restaurant is open 7 days a week, except for public holidays and special occasions.
+          The Little Lemon Restaurant is open 7 days a week, except for public
+          holidays and special occasions.
         </p>
         <ul>
-          <li>Mon - Fri: 2pm - 10pm</li>
-          <li>Sat: 2pm - 11pm</li>
-          <li>Sun: 2pm - 9pm</li>
+          {% for item in opening_hours %}
+          <li>{{item.days}}: {{item.opening_hour}} - {{item.closing_hour}}</li>
+          {% endfor %}
         </ul>
       </div>
     </article>
 
-    <article class="card custom-rounded shadow main-card">
+    <article class="card custom-rounded shadow main-card custom-border">
       <img
         src="{% static 'img/grill.webp' %}"
         class="card-img-top custom-rounded-top"
@@ -75,13 +77,16 @@
           Our menu consists of 12-15 seasonal items based on Italian, Greek, and
           Turkish culture.
         </p>
-        <a href="{% url 'menu' %}" class="d-flex justify-content-center pt-3 text-decoration-none">
+        <a
+          href="{% url 'menu' %}"
+          class="d-flex justify-content-center pt-3 text-decoration-none"
+        >
           <button class="custom-btn">Browse Menu</button>
         </a>
       </div>
     </article>
 
-    <article class="card custom-rounded shadow main-card">
+    <article class="card custom-rounded shadow main-card custom-border">
       <img
         src="{% static 'img/salad.webp' %}"
         class="card-img-top custom-rounded-top"
@@ -93,7 +98,10 @@
           Reserve your table online for an Italian, Greek, and Turkish dining
           experience at our restaurant.
         </p>
-        <a href="{% url 'booking' %}" class="d-flex justify-content-center pt-3 text-decoration-none">
+        <a
+          href="{% url 'booking' %}"
+          class="d-flex justify-content-center pt-3 text-decoration-none"
+        >
           <button class="custom-btn">Book a Table</button>
         </a>
       </div>
@@ -123,7 +131,7 @@
           <button class="custom-btn">More about us</button>
         </a>
       </div>
-      <div class="col container-relative" style="height: 440px;">
+      <div class="col container-relative" style="height: 440px">
         <img
           src="{% static 'img/about-1.webp' %}"
           alt=""
@@ -141,71 +149,35 @@
 
 <section class="container section-margin">
   <div class="d-flex justify-content-between mb-3">
-    <h5 class="display-4 primary-font mb-4 text-shadow" style="font-weight: 600">
+    <h3
+      class="display-4 primary-font mb-4 text-shadow"
+      style="font-weight: 600"
+    >
       This week specials!
-    </h5>
+    </h3>
     <span class="mt-1">
       <a href="{% url 'menu' %}">
         <button class="custom-btn">Discover selections</button>
       </a>
     </span>
   </div>
-  <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-4">
-    <article class="card custom-rounded shadow secondary-card">
+  <div
+    class="d-flex flex-column flex-md-row flex-wrap justify-content-between align-items-center gap-4"
+  >
+    {% for menu in menus %}
+    <article class="card custom-rounded shadow secondary-card custom-border">
       <img
-        src="{% static 'img/bruschetta.webp' %}"
-        height="240px"
+        src="{{ menu.image.url }}"
+        style="aspect-ratio: 3/2.5"
         class="card-img-top custom-rounded-top"
       />
       <div class="card-body">
-        <h5 class="card-title mt-1">Bruschetta</h5>
-        <p class="card-text pt-1">
-          Our Bruschetta is made from grilled bread that has been smeared with garlic, seasoned with salt, and drizzled with olive oil, creating a delightful appetizer.
-        </p>
+        <h5 class="card-title mt-1">{{ menu.name }}</h5>
+        <p class="card-text pt-1">{{ menu.description }}</p>
       </div>
     </article>
-
-    <article class="card custom-rounded shadow secondary-card">
-      <img
-        src="{% static 'img/greek-salad.webp' %}"
-        height="240px"
-        class="card-img-top custom-rounded-top"
-      />
-      <div class="card-body">
-        <h5 class="card-title mt-1">Greek Salad</h5>
-        <p class="card-text pt-1">
-          The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese, garnished with crunchy garlic and rosemary croutons.
-        </p>
-      </div>
-    </article>
-
-    <article class="card custom-rounded shadow secondary-card">
-      <img
-        src="{% static 'img/grilled-fish.webp' %}"
-        height="240px"
-        class="card-img-top custom-rounded-top"
-      />
-      <div class="card-body">
-        <h5 class="card-title mt-1">Greed Fish</h5>
-        <p class="card-text pt-1">
-          The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese, garnished with crunchy garlic and rosemary croutons.
-        </p>
-      </div>
-    </article>
-
-    <article class="card custom-rounded shadow secondary-card">
-      <img
-        src="{% static 'img/lemon-dessert.webp' %}"
-        height="240px"
-        class="card-img-top custom-rounded-top"
-      />
-      <div class="card-body">
-        <h5 class="card-title mt-1">Lemon Dessert</h5>
-        <p class="card-text pt-1">
-          This comes straight from grandma’s cherished recipe book, every last ingredient has been sourced and is as authentic and nostalgic as can be imagined.
-        </p>
-      </div>
-    </article>
-  </section>
+    {% endfor %}
+  </div>
+</section>
 
 {% endblock %}

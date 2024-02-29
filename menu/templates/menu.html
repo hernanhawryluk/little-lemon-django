@@ -1,29 +1,113 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
-<div class="custom-gradient" style="height: 500px"></div>
+<div
+  style="
+    background-color: #495e57;
+    position: absolute;
+    width: 100%;
+    height: 370px;
+    z-index: -1;
+  "
+></div>
+
 <section class="container pt-3">
-    <div class="d-flex justify-content-between mb-3">
-      <h5 class="display-4 primary-font mb-4 text-shadow" style="font-weight: 600">
-        This Season Menu!
-      </h5>
-    </div>
-    <div class="d-flex flex-wrap flex-column flex-md-row justify-content-evenly align-items-center gap-4">
-      {% for menu in menus %}
-      <article class="card custom-rounded shadow secondary-card">
+  <h2
+    class="custom-primary display-4 primary-font mb-4 mt-4 text-shadow"
+    style="font-weight: 600"
+  >
+    This Season Menu!
+  </h2>
+  <div
+    class="d-flex flex-wrap flex-column flex-md-row justify-content-evenly align-items-center gap-4"
+  >
+    {% for menu in menus %}
+    <article class="card custom-rounded shadow secondary-card custom-border">
+      <img
+        src="{{ menu.image.url }}"
+        style="aspect-ratio: 3/2.5"
+        class="card-img-top custom-rounded-top"
+      />
+      <div class="card-body">
+        <h5 class="card-title mt-1">{{ menu.name }}</h5>
+        <p class="card-text pt-1">{{ menu.description }}</p>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="relative mt-5">
+  <div
+    style="
+      position: absolute;
+      background-color: #495e57;
+      width: 100%;
+      height: 370px;
+      z-index: -1;
+    "
+  ></div>
+  <div class="container pt-3">
+    <h2
+      class="custom-primary display-4 primary-font mb-4 mt-4 text-shadow"
+      style="font-weight: 600"
+    >
+      This Season Drinks!
+    </h2>
+    <div
+      class="d-flex flex-wrap flex-column flex-md-row justify-content-evenly align-items-center gap-4"
+    >
+      {% for drink in drinks %}
+      <article class="card custom-rounded shadow secondary-card custom-border">
         <img
-          src="{{ menu.image.url }}"
+          src="{{ drink.image.url }}"
           style="aspect-ratio: 3/2.5"
           class="card-img-top custom-rounded-top"
         />
-        <div class="card-body d-flex flex-column justify-content-between">
-          <h5 class="card-title mt-1">{{ menu.name }}</h5>
-          <p class="card-text pt-1">
-            {{ menu.description }}
-          </p>
-          <p>Precio <strong>$ {{ menu.price }}</strong></p>
+        <div class="card-body">
+          <h5 class="card-title mt-1">{{ drink.name }}</h5>
+          <p class="card-text pt-1">{{ drink.description }}</p>
         </div>
       </article>
       {% endfor %}
-    </section>
+    </div>
+  </div>
+</section>
+
+<section class="relative my-5">
+  <div
+    style="
+      position: absolute;
+      background-color: #495e57;
+      width: 100%;
+      height: 370px;
+      z-index: -1;
+    "
+  ></div>
+  <div class="container pt-3">
+    <h2
+      class="custom-primary display-4 primary-font mb-4 mt-4 text-shadow"
+      style="font-weight: 600"
+    >
+      This Season Desserts!
+    </h2>
+    <div
+      class="d-flex flex-wrap flex-column flex-md-row justify-content-evenly align-items-center gap-4"
+    >
+      {% for dessert in desserts %}
+      <article class="card custom-rounded shadow secondary-card custom-border">
+        <img
+          src="{{ dessert.image.url }}"
+          style="aspect-ratio: 3/2.5"
+          class="card-img-top custom-rounded-top"
+        />
+        <div class="card-body">
+          <h5 class="card-title mt-1">{{ dessert.name }}</h5>
+          <p class="card-text pt-1">{{ dessert.description }}</p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 
 {% endblock %}

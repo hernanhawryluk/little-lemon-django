@@ -9,4 +9,5 @@ class MenuSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = '__all__'
+        fields = ['menu', 'rating', 'comment', 'created', 'updated']
+        read_only_fields = ['user']

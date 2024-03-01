@@ -8,7 +8,7 @@
       >
         <h2 class="custom-primary">{{ item.name }}</h2>
         <p class="h5">{{ item.description }}</p>
-        {% if comments %}
+        {% if total_reviews %}
         <p class="px-1">
           ☆ {{ average_rating }} Stars - {{ total_reviews }} Comments
         </p>
@@ -37,39 +37,20 @@
   <div class="row mt-4">
     <div class="col-7">
       <h3>Comments and Reviews</h3>
-      {% if comments %}
+      {% if reviews %} {% for reviews in reviews %}
       <div>
-        <h5>Hernan</h5>
-        <p>4 Stars</p>
+        <h5>{{ reviews.user.username }}</h5>
+        <p>{{ reviews.rating }} Stars</p>
         <div class="plain-rating">
+          {% for i in "12345" %} {% if i|add:0 <= reviews.rating %}
           <span>★</span>
-          <span>★</span>
-          <span>★</span>
-          <span>★</span>
+          {% else %}
           <span>☆</span>
+          {% endif %} {% endfor %}
         </div>
-        <p>
-          Savor the perfection at Little Lemon! Their pizza is a slice of heaven
-          – a harmonious blend of flavors, crisp crust, and gooey cheese. A
-          symphony for your taste buds! 🍕✨
-        </p>
+        <p>{{ reviews.comment }}</p>
       </div>
-      <div>
-        <h5>Raul</h5>
-        <p>3 Stars</p>
-        <div class="plain-rating">
-          <span>★</span>
-          <span>★</span>
-          <span>★</span>
-          <span>☆</span>
-          <span>☆</span>
-        </div>
-        <p>
-          Experience the excellence at Little Lemon! Their pizza is truly
-          delightful – a perfect combination of flavors, a crunchy crust, and
-          melted cheese. A melody for your taste buds! 🍕✨
-        </p>
-      </div>
+      {% endfor %}
       <div><a href="">See all comments and reviews</a></div>
       {% else %}
       <p class="px-1 pt-3">No comments yet</p>
@@ -79,6 +60,7 @@
     <div class="col-4 mt-5 pt-5">
       <h3 class="mt-5">Review this menu</h3>
       <form action="">
+        {% csrf_token %}
         <div class="d-flex gap-2 align-items-center">
           <label class="h5" for="rating">Rating:</label>
           <div class="rating pb-2">
@@ -99,17 +81,54 @@
             >
           </div>
         </div>
-
         <label class="h5 mb-2" for="comments">Comment your experience:</label>
         <textarea
           rows="8"
           cols="38"
-          class="custom-border px-3 py-2 mb-4"
+          class="custom-border px-3 pt-2"
           placeholder="Escribe tu comentario aquí..."
         ></textarea>
+        <button class="appoint-btn mb-4" type="submit">Submit review</button>
       </form>
     </div>
   </div>
+  <script>
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const rating = document.querySelector("input[name=rating]:checked").value;
+      const comment = document.querySelector("textarea").value;
+
+      const review = {
+        menu: "{{ item.pk }}",
+        rating: rating,
+        comment: comment,
+      };
+
+      function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(";").shift();
+      }
+
+      fetch("/reviews/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": getCookie("csrftoken"),
+        },
+        body: JSON.stringify(review),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    });
+  </script>
 </section>
 
 {% endblock %}

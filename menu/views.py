@@ -28,15 +28,25 @@ class ReviewViews(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        reviews = Review.objects.all()
-        serializer = ReviewSerializer(reviews, many=True)
-        return Response(serializer.data)
+        menu = self.request.query_params.get('menu')
+        avoid = self.request.query_params.get('avoid')
+        avoid_list = list(filter(None, avoid.split()))
+        if menu is not None:
+            reviews = Review.objects.filter(menu=menu).exclude(pk__in=avoid_list)[:2]
+            if reviews:
+                serializer = ReviewSerializer(reviews, many=True)
+                return Response(serializer.data)
+            else: 
+                return Response({'message': 'No reviews found.'}, status=status.HTTP_200_OK)
 
     def post(self, request):
         serializer = ReviewSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            if Review.objects.filter(user=request.user, menu=serializer.validated_data['menu']).exists():
+                return Response({'error': 'You have already reviewed this menu item.'}, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                serializer.save(user=request.user)
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk):

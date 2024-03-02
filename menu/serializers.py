@@ -7,7 +7,9 @@ class MenuSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ReviewSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source='user.username')
+    pk = serializers.ReadOnlyField()
+    
     class Meta:
         model = Review
-        fields = ['menu', 'rating', 'comment', 'created', 'updated']
-        read_only_fields = ['user']
+        fields = ['pk', 'user', 'menu', 'rating', 'comment', 'created', 'updated']

@@ -51,7 +51,15 @@
         <p>{{ reviews.comment }}</p>
       </div>
       {% endfor %}
-      <div><a href="">See all comments and reviews</a></div>
+      <div id="load-more">
+        <span
+          class="text-decoration-underline text-primary"
+          style="cursor: pointer"
+          onclick="fetchMoreReviews()"
+        >
+          See more comments and reviews
+        </span>
+      </div>
       {% else %}
       <p class="px-1 pt-3">No comments yet</p>
       {% endif %}
@@ -93,6 +101,59 @@
     </div>
   </div>
   <script>
+    let loadedReviews = "";
+
+    function fetchMoreReviews() {
+      const review = fetch(
+        "/reviews/?menu={{ item.pk }}&avoid={% for review in reviews %} {{ review.pk }}{% endfor %}" +
+          loadedReviews,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.length > 0) {
+            data.forEach((review) => {
+              loadedReviews += " " + review.pk;
+            });
+            showMoreReviews(data);
+          } else {
+            console.log("No more reviews found");
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
+
+    function showMoreReviews(data) {
+      loadMoreContainer = document.getElementById("load-more");
+      const fragment = document.createDocumentFragment();
+
+      data.forEach((review) => {
+        const div = document.createElement("div");
+        div.innerHTML = `
+          <div>
+            <h5>${review.user}</h5>
+            <p>${review.rating} Stars</p>
+              <div class="plain-rating">
+                ${"12345"
+                  .split("")
+                  .map((i) => `<span>${i <= review.rating ? "★" : "☆"}</span>`)
+                  .join("")}
+              </div>
+            <p>${review.comment}</p>
+          </div>
+        `;
+        fragment.appendChild(div);
+      });
+      loadMoreContainer.appendChild(fragment);
+    }
+
     const form = document.querySelector("form");
 
     form.addEventListener("submit", (e) => {

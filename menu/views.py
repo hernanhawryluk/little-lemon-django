@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.exceptions import PermissionDenied
 from rest_framework import status
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from . models import Menu, Review
 # from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
@@ -30,14 +31,33 @@ class ReviewViews(APIView):
     def get(self, request):
         menu = self.request.query_params.get('menu')
         avoid = self.request.query_params.get('avoid')
-        avoid_list = list(filter(None, avoid.split()))
+        if avoid:
+            avoid_list = list(filter(None, avoid.split()))
+        user = self.request.query_params.get('user')
+
         if menu is not None:
-            reviews = Review.objects.filter(menu=menu).exclude(pk__in=avoid_list)[:2]
-            if reviews:
+            if user is not None:
+                try:
+                    review = Review.objects.filter(menu=menu, user=user)
+                    if review.exists():
+                        serializer = ReviewSerializer(review.first())
+                        return Response(serializer.data, status=status.HTTP_200_OK)
+                except:
+                    return Response({'message': 'No reviews found for this user.'}, status=status.HTTP_204_NO_CONTENT)
+                
+            if avoid is not None:
+                reviews = Review.objects.filter(menu=menu).exclude(pk__in=avoid_list)[:2]
+            else:
+                reviews = Review.objects.filter(menu=menu)[:2]
+
+            if reviews.exists():
                 serializer = ReviewSerializer(reviews, many=True)
-                return Response(serializer.data)
+                return Response(serializer.data, status=status.HTTP_200_OK)
             else: 
                 return Response({'message': 'No reviews found.'}, status=status.HTTP_200_OK)
+            
+        else:
+            return Response({'message': 'Invalid request.'}, status=status.HTTP_400_BAD_REQUEST)
 
     def post(self, request):
         serializer = ReviewSerializer(data=request.data)
@@ -49,20 +69,29 @@ class ReviewViews(APIView):
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def put(self, request, pk):
-        review = self.get_object(pk)
+    def put(self, request):
+        review = self.get_object(request.data['pk'])
         serializer = ReviewSerializer(review, data=request.data)
         if serializer.is_valid() and review.user == request.user:
-            serializer.save()
-            return Response(serializer.data)
+            if Review.objects.filter(user=request.user, menu=serializer.validated_data['menu']).exists():
+                serializer.save(user=request.user)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                return Response({'error': 'You have not reviewed this menu item.'}, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk):
-        review = self.get_object(pk)
-        if review.user == request.user:
-            review.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        return Response(status=status.HTTP_403_FORBIDDEN)
+    def delete(self, request):
+        try:
+            review = Review.objects.get(pk=request.data['pk'])
+            if review.user == request.user:
+                review.delete()
+                return Response({'message': 'Review deleted successfully.'}, status=status.HTTP_200_OK)
+            else: 
+                raise PermissionDenied(detail='You do not have permission to delete this review.')
+        except Review.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def get_object(self, pk):
         try:

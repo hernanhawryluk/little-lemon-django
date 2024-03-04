@@ -38,7 +38,7 @@
     <div class="col-7">
       <h3>Comments and Reviews</h3>
       {% if reviews %} {% for reviews in reviews %}
-      <div>
+      <div id="review-{{ reviews.pk }}">
         <h5>{{ reviews.user.username }}</h5>
         <p>{{ reviews.rating }} Stars</p>
         <div class="plain-rating">
@@ -50,19 +50,23 @@
         </div>
         <p>{{ reviews.comment }}</p>
       </div>
-      {% endfor %}
-      <div id="load-more">
+      {% endfor %} {% else %}
+      <p class="px-1 pt-3">No comments yet</p>
+      {% endif %}
+      <div>
+        {% if total_reviews > 2 %}
         <span
           class="text-decoration-underline text-primary"
           style="cursor: pointer"
-          onclick="fetchMoreReviews()"
+          onclick="fetchReviews()"
+          id="load-more-btn"
         >
           See more comments and reviews
         </span>
+        {% endif %}
+
+        <div id="load-more-container" class="pb-4"></div>
       </div>
-      {% else %}
-      <p class="px-1 pt-3">No comments yet</p>
-      {% endif %}
     </div>
     <div class="col-1"></div>
     <div class="col-4 mt-5 pt-5">
@@ -94,101 +98,219 @@
           rows="8"
           cols="38"
           class="custom-border px-3 pt-2"
+          id="comments"
           placeholder="Escribe tu comentario aquí..."
         ></textarea>
-        <button class="appoint-btn mb-4" type="submit">Submit review</button>
+        <button
+          class="appoint-btn mb-4 d-flex justify-content-center align-items-center"
+          id="submit-btn"
+          type="submit"
+        >
+          <span class="loader" id="btn-loader" style="display: none"></span>
+          <span id="btn-text"> Submit review </span>
+        </button>
       </form>
+      <div id="delete-btn-container"></div>
     </div>
   </div>
-  <script>
-    let loadedReviews = "";
 
-    function fetchMoreReviews() {
-      const review = fetch(
-        "/reviews/?menu={{ item.pk }}&avoid={% for review in reviews %} {{ review.pk }}{% endfor %}" +
-          loadedReviews,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.length > 0) {
-            data.forEach((review) => {
-              loadedReviews += " " + review.pk;
-            });
-            showMoreReviews(data);
-          } else {
-            console.log("No more reviews found");
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+  <script>
+    let initialFetch = true;
+    let pkAlreadyLoaded = "";
+    let numberOfLoaded = 2;
+    let numberOfTotal = parseInt("{{ total_reviews }}");
+    let userHasReview = false;
+    let userReviewPK = "";
+    const loadMoreContainer = document.getElementById("load-more-container");
+    const loadMoreBtn = document.getElementById("load-more-btn");
+    const btnText = document.getElementById("btn-text");
+
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(";").shift();
     }
 
-    function showMoreReviews(data) {
-      loadMoreContainer = document.getElementById("load-more");
+    async function fetchAction(method, url, csrfToken = "", body = {}) {
+      try {
+        const request = {
+          method: method,
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken,
+          },
+        };
+
+        if (method != "GET") {
+          request.body = JSON.stringify(body);
+        }
+
+        const response = await fetch(url, request);
+        data = await response.json();
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    async function fetchOwnReview() {
+      data = await fetchAction(
+        "GET",
+        "/reviews/?menu={{ item.pk }}&user={{ request.user.id }}"
+      );
+
+      if (data.rating > 0) {
+        userHasReview = true;
+        userReviewPK = data.pk;
+        const rating = document.getElementById(data.rating);
+        rating.checked = true;
+
+        const comment = document.getElementById("comments");
+        comment.value = data.comment;
+
+        btnText.textContent = "Update review";
+      }
+      createDeleteButton(data.pk);
+    }
+
+    async function fetchReviews() {
+      const data = await fetchAction(
+        "GET",
+        "/reviews/?menu={{ item.pk }}&avoid={% for review in reviews %} {{ review.pk }}{% endfor %}" +
+          pkAlreadyLoaded
+      );
+
+      if (data.length > 0) {
+        data.forEach((review) => {
+          pkAlreadyLoaded += " " + review.pk;
+        });
+        renderReviews(data);
+      } else {
+        console.log("No more reviews found");
+      }
+    }
+
+    async function submitForm(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById("submit-btn");
+      const btnLoader = document.getElementById("btn-loader");
+      btnLoader.style.display = "block";
+      btnText.style.display = "none";
+      submitBtn.disabled = true;
+
+      const rating = document.querySelector("input[name=rating]:checked").value;
+      const comment = document.querySelector("textarea").value;
+
+      const url = "/reviews/";
+      csrfToken = getCookie("csrftoken");
+      const body = {
+        menu: "{{ item.pk }}",
+        rating: rating,
+        comment: comment,
+      };
+      if (userHasReview) body.pk = userReviewPK;
+
+      data = await fetchAction(
+        userHasReview ? "PUT" : "POST",
+        url,
+        csrfToken,
+        body
+      );
+
+      if (data.pk > 0) {
+        if (!userHasReview) {
+          userHasReview = true;
+          btnText.textContent = "Update review";
+          pkAlreadyLoaded += " " + data.pk;
+          userReviewPK = data.pk;
+          createDeleteButton();
+          renderReviews([data]);
+        } else {
+          deleteReviewDiv(data.pk);
+          renderReviews([data]);
+        }
+      }
+
+      btnLoader.style.display = "none";
+      btnText.style.display = "block";
+      submitBtn.disabled = false;
+    }
+
+    async function deleteReview() {
+      csrfToken = getCookie("csrftoken");
+      const body = {
+        pk: userReviewPK,
+      };
+
+      const data = await fetchAction("DELETE", "/reviews/", csrfToken, body);
+
+      if (data.message == "Review deleted successfully.") {
+        deleteReviewDiv(userReviewPK);
+        form.reset();
+        userHasReview = false;
+        userReviewPK = "";
+        btnText.textContent = "Submit review";
+        deleteButton = document.getElementById("delete-btn");
+        deleteButton.remove();
+      }
+    }
+
+    function renderReviews(data) {
       const fragment = document.createDocumentFragment();
 
       data.forEach((review) => {
         const div = document.createElement("div");
         div.innerHTML = `
-          <div>
-            <h5>${review.user}</h5>
-            <p>${review.rating} Stars</p>
-              <div class="plain-rating">
-                ${"12345"
-                  .split("")
-                  .map((i) => `<span>${i <= review.rating ? "★" : "☆"}</span>`)
-                  .join("")}
+              <div id="review-${review.pk}">
+                <h5>${review.user}</h5>
+                <p>${review.rating} Stars</p>
+                  <div class="plain-rating">
+                    ${"12345"
+                      .split("")
+                      .map(
+                        (i) => `<span>${i <= review.rating ? "★" : "☆"}</span>`
+                      )
+                      .join("")}
+                  </div>
+                <p>${review.comment}</p>
               </div>
-            <p>${review.comment}</p>
-          </div>
-        `;
+            `;
         fragment.appendChild(div);
+        numberOfLoaded += 1;
       });
       loadMoreContainer.appendChild(fragment);
+
+      if (parseInt("{{total_reviews}}") > 2) {
+        if (numberOfLoaded >= numberOfTotal) {
+          loadMoreBtn.style.display = "none";
+        }
+      }
     }
 
+    function createDeleteButton() {
+      const btnContainer = document.getElementById("delete-btn-container");
+
+      btnContainer.innerHTML = `
+              <button
+                class="appoint-btn mb-4 d-flex justify-content-center align-items-center"
+                onClick={deleteReview()} id="delete-btn"
+              >
+                <span class="loader" style="display: none"></span>
+                <span id="btn-text">Delete review</span>
+              </button>
+            `;
+    }
+
+    function deleteReviewDiv(pk) {
+      const div = document.getElementById("review-" + pk);
+      if (div) div.remove();
+      numberOfLoaded -= 1;
+    }
+
+    fetchOwnReview();
+
     const form = document.querySelector("form");
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const rating = document.querySelector("input[name=rating]:checked").value;
-      const comment = document.querySelector("textarea").value;
-
-      const review = {
-        menu: "{{ item.pk }}",
-        rating: rating,
-        comment: comment,
-      };
-
-      function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(";").shift();
-      }
-
-      fetch("/reviews/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": getCookie("csrftoken"),
-        },
-        body: JSON.stringify(review),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    });
+    form.addEventListener("submit", (e) => submitForm(e));
   </script>
 </section>
 

@@ -1,10 +1,10 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
 <section class="custom-secondary">
-  <div class="container">
-    <div class="row" style="height: 390px">
+  <div class="container pt-4 pt-md-0">
+    <div class="d-flex flex-md-row flex-column item-desc-container">
       <div
-        class="col-6 text-white d-flex flex-column justify-content-center gap-4"
+        class="col-md-6 col-12 text-white d-flex flex-column justify-content-center gap-4"
       >
         <h2 class="custom-primary">{{ item.name }}</h2>
         <p class="h5">{{ item.description }}</p>
@@ -14,19 +14,11 @@
         </p>
         {% endif %}
       </div>
-      <div class="col-2"></div>
-      <div class="col-4" style="position: relative">
+      <div class="col-2 d-none d-md-block"></div>
+      <div class="col-md-4 col-12 mt-4 mt-md-0" style="position: relative">
         <img
           src="{{ item.image.url }}"
-          style="
-            height: 490px;
-            width: 360px;
-            object-fit: cover;
-            position: absolute;
-            top: 60px;
-            left: 0;
-          "
-          class="img-fluid custom-rounded"
+          class="img-fluid item-desc-img custom-rounded"
         />
       </div>
     </div>
@@ -34,8 +26,8 @@
 </section>
 
 <section class="container pt-4">
-  <div class="row mt-4">
-    <div class="col-7">
+  <div class="d-flex flex-column flex-md-row mt-4">
+    <div class="col-md-7 col-12">
       <h3>Comments and Reviews</h3>
       {% if reviews %} {% for reviews in reviews %}
       <div id="review-{{ reviews.pk }}">
@@ -68,9 +60,9 @@
         <div id="load-more-container" class="pb-4"></div>
       </div>
     </div>
-    <div class="col-1"></div>
-    <div class="col-4 mt-5 pt-5">
-      <h3 class="mt-5">Review this menu</h3>
+    <div class="col-1 d-none d-md-block"></div>
+    <div class="col-12 col-md-4 mt-md-5 pt-md-5">
+      <h3 class="mt-md-5">Review this menu</h3>
       <form action="">
         {% csrf_token %}
         <div class="d-flex gap-2 align-items-center">
@@ -96,8 +88,7 @@
         <label class="h5 mb-2" for="comments">Comment your experience:</label>
         <textarea
           rows="8"
-          cols="38"
-          class="custom-border px-3 pt-2"
+          class="custom-border px-3 pt-2 w-100"
           id="comments"
           placeholder="Escribe tu comentario aquí..."
         ></textarea>
@@ -110,7 +101,7 @@
           <span id="btn-text"> Submit review </span>
         </button>
       </form>
-      <div id="delete-btn-container"></div>
+      <div class="pb-2" id="delete-btn-container"></div>
     </div>
   </div>
 
@@ -169,8 +160,8 @@
         comment.value = data.comment;
 
         btnText.textContent = "Update review";
+        createDeleteButton(data.pk);
       }
-      createDeleteButton(data.pk);
     }
 
     async function fetchReviews() {

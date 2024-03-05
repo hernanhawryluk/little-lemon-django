@@ -11,6 +11,8 @@ body {
   font-family: "Karla", sans-serif;
 }
 
+/* ------ CUSTOM STYLES ----- */
+
 .primary-font {
   font-family: "Markazi Text", serif;
   font-optical-sizing: auto;
@@ -171,7 +173,7 @@ body {
 
 .main-card {
   height: 470px;
-  width: 320px;
+  width: 330px;
 }
 
 .special-img-1 {
@@ -258,7 +260,7 @@ select {
 }
 
 .section-container {
-  min-height: calc(100vh - 490px);
+  min-height: calc(100vh - 384px);
 }
 
 .auth-container {
@@ -313,7 +315,20 @@ select {
   }
 }
 
-/* ---------- MOVIL MEDIA QUERIES ---------- */
+.item-desc-img {
+  height: 490px;
+  width: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 60px;
+  left: 0;
+}
+
+.item-desc-container {
+  height: 390px;
+}
+
+/* ---------- MEDIA QUERIES ---------- */
 
 @media (max-width: 992px) {
   .main-container {
@@ -337,8 +352,13 @@ select {
   }
 
   .main-card {
-    width: 90%;
+    width: 100%;
     height: 100%;
+  }
+
+  .section-margin {
+    margin-top: 60px;
+    margin-bottom: 40px;
   }
 
   .special-img-1 {
@@ -355,7 +375,7 @@ select {
   }
 
   .secondary-card {
-    width: 90%;
+    width: 100%;
     height: 100%;
   }
 
@@ -370,7 +390,16 @@ select {
   }
 
   .auth-container {
-    width: 95%;
+    width: 98%;
+  }
+
+  .item-desc-container {
+    height: 480px;
+    margin-bottom: 150px;
+  }
+
+  .item-desc-img {
+    top: 0px;
   }
 }
 

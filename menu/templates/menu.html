@@ -1,43 +1,46 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
-<div
-  style="
-    background-color: #495e57;
-    position: absolute;
-    width: 100%;
-    height: 370px;
-    z-index: -1;
-  "
-></div>
-
-<section class="container pt-3">
-  <h2
-    class="custom-primary display-4 primary-font mb-4 mt-4 text-shadow"
-    style="font-weight: 600"
-  >
-    This Season Menu!
-  </h2>
+<section>
   <div
-    class="d-flex flex-wrap flex-column flex-md-row justify-content-evenly align-items-center gap-4"
-  >
-    {% for menu in menus %}
-    <a
-      href="{% url 'item' pk=menu.pk %}"
-      class="text-decoration-none custom-hover"
+    style="
+      position: absolute;
+      background-color: #495e57;
+      width: 100%;
+      height: 370px;
+      z-index: -1;
+    "
+  ></div>
+  <div class="container pt-3">
+    <h2
+      class="custom-primary display-4 primary-font mb-4 mt-4 text-shadow"
+      style="font-weight: 600"
     >
-      <article class="card custom-rounded shadow secondary-card custom-border">
-        <img
-          src="{{ menu.image.url }}"
-          style="aspect-ratio: 3/2.5"
-          class="card-img-top custom-rounded-top"
-        />
-        <div class="card-body">
-          <h5 class="card-title mt-1">{{ menu.name }}</h5>
-          <p class="card-text pt-1">{{ menu.description }}</p>
-        </div>
-      </article>
-    </a>
-    {% endfor %}
+      This Season Menu!
+    </h2>
+    <div
+      class="d-flex flex-wrap flex-column flex-md-row justify-content-evenly align-items-center gap-4"
+    >
+      {% for menu in menus %}
+      <a
+        href="{% url 'item' pk=menu.pk %}"
+        class="text-decoration-none custom-hover"
+      >
+        <article
+          class="card custom-rounded shadow secondary-card custom-border"
+        >
+          <img
+            src="{{ menu.image.url }}"
+            style="aspect-ratio: 3/2.5"
+            class="card-img-top custom-rounded-top"
+          />
+          <div class="card-body">
+            <h5 class="card-title mt-1">{{ menu.name }}</h5>
+            <p class="card-text pt-1">{{ menu.description }}</p>
+          </div>
+        </article>
+      </a>
+      {% endfor %}
+    </div>
   </div>
 </section>
 

@@ -43,7 +43,7 @@
     Discover our restaurant!
   </h2>
   <div
-    class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-5"
+    class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-5 gap-md-4"
   >
     <article class="card custom-rounded shadow main-card custom-border">
       <img
@@ -155,7 +155,7 @@
     >
       This week specials!
     </h3>
-    <span class="mt-1">
+    <span class="mt-1 d-none d-md-block">
       <a href="{% url 'menu' %}">
         <button class="custom-btn">Discover selections</button>
       </a>
@@ -177,6 +177,11 @@
       </div>
     </article>
     {% endfor %}
+    <span class="mt-1 d-block d-md-none">
+      <a href="{% url 'menu' %}">
+        <button class="custom-btn">Discover selections</button>
+      </a>
+    </span>
   </div>
 </section>
 

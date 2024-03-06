@@ -165,17 +165,22 @@
     class="d-flex flex-column flex-md-row flex-wrap justify-content-between align-items-center gap-4"
   >
     {% for menu in menus %}
-    <article class="card custom-rounded shadow secondary-card custom-border">
-      <img
-        src="{{ menu.image.url }}"
-        style="aspect-ratio: 3/2.5"
-        class="card-img-top custom-rounded-top"
-      />
-      <div class="card-body">
-        <h5 class="card-title mt-1">{{ menu.name }}</h5>
-        <p class="card-text pt-1">{{ menu.description }}</p>
-      </div>
-    </article>
+    <a
+      href="{% url 'item' pk=menu.pk %}"
+      class="text-decoration-none custom-hover"
+    >
+      <article class="card custom-rounded shadow secondary-card custom-border">
+        <img
+          src="{{ menu.image.url }}"
+          style="aspect-ratio: 3/2.5"
+          class="card-img-top custom-rounded-top"
+        />
+        <div class="card-body">
+          <h5 class="card-title mt-1">{{ menu.name }}</h5>
+          <p class="card-text pt-1">{{ menu.description }}</p>
+        </div>
+      </article>
+    </a>
     {% endfor %}
     <span class="mt-1 d-block d-md-none">
       <a href="{% url 'menu' %}">

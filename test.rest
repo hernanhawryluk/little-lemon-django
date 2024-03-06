@@ -1,0 +1,89 @@
+### Use with "REST CLIENT" extension
+
+### User Login
+
+POST http://127.0.0.1:8000/api/login
+Content-Type: application/json
+
+{ "email": "zack@gmail.com", "password": "Pass1234!" }
+
+### User Signup
+
+POST http://127.0.0.1:8000/api/signup
+Content-Type: application/json
+
+{ "username": "zack1", "password": "Pass1234!", "email": "zack1@gmail.com" }
+
+### Test Token
+
+GET http://127.0.0.1:8000/api/test-token
+Content-Type: application/json
+Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
+
+{}
+
+### Get all bookings for current user
+
+GET http://127.0.0.1:8000/api/bookings/
+Content-Type: application/json
+Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
+
+{}
+
+### Create a reservation
+
+POST http://127.0.0.1:8000/api/bookings/
+Content-Type: application/json
+Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
+
+{
+  "date": "2024-04-22",
+  "time": "22:30",
+  "guests": 1,
+  "occasion": "Casual"
+}
+
+### Get reservation details
+
+GET http://127.0.0.1:8000/api/bookings/2
+Content-Type: application/json
+Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
+
+{}
+
+### Correct a reservation
+
+PUT http://127.0.0.1:8000/api/bookings/3
+Content-Type: application/json
+Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
+
+{
+  "date": "2024-05-22",
+  "time": "22:30",
+  "guests": 1,
+  "occasion": "Casual"
+}
+
+### Delete a reservation
+
+DELETE http://127.0.0.1:8000/api/bookings/3/
+Content-Type: application/json
+Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
+
+{}
+
+### Get all menu items
+
+### Get one menu item
+
+### Get reviews for one item
+
+### Write a review
+
+### Edit a review
+
+### Delete a review
+
+### Get restaurant hours
+
+

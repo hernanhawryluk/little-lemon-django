@@ -31,6 +31,25 @@ body {
   min-height: calc(100vh - 420px);
 }
 
+.modal-btn {
+  background-color: var(--secondary-color);
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  height: 40px;
+  width: 80px;
+  transition: 0.5s ease;
+}
+
+.modal-btn:hover {
+  transform: scale(1.03);
+  background-color: #394e47;
+}
+
+.modal-btn:active {
+  transform: scale(0.9);
+}
+
 .custom-bg {
   background-image: linear-gradient(
       0deg,
@@ -400,6 +419,10 @@ select {
 
   .item-desc-img {
     top: 0px;
+  }
+
+  .custom-hover:hover {
+    transform: scale(1.1);
   }
 }
 

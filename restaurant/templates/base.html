@@ -38,7 +38,9 @@
 
   <body>
     {% include 'partials/_header.html' %}
-    <main class="main-container">{% block content %} {% endblock %}</main>
+    <main class="main-container">
+      {% block content %} {% endblock %} {% include 'partials/_modal.html' %}
+    </main>
     {% include 'partials/_footer.html' %}
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

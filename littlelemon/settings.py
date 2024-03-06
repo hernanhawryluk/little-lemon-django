@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     'users',
     'menu',
     'booking',
+    'api',
     'rest_framework',
     'rest_framework.authtoken',
-    'djoser',
 ]
 
 MIDDLEWARE = [

@@ -1,18 +1,18 @@
 ### Use with "REST CLIENT" extension
 
+### User Signup
+
+POST http://127.0.0.1:8000/api/signup
+Content-Type: application/json
+
+{ "username": "zack2", "password": "Pass1234!", "email": "zack2@gmail.com" }
+
 ### User Login
 
 POST http://127.0.0.1:8000/api/login
 Content-Type: application/json
 
 { "email": "zack@gmail.com", "password": "Pass1234!" }
-
-### User Signup
-
-POST http://127.0.0.1:8000/api/signup
-Content-Type: application/json
-
-{ "username": "zack1", "password": "Pass1234!", "email": "zack1@gmail.com" }
 
 ### Test Token
 
@@ -24,7 +24,15 @@ Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
 
 ### Get all bookings for current user
 
-GET http://127.0.0.1:8000/api/bookings/
+GET http://127.0.0.1:8000/api/booking/
+Content-Type: application/json
+Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
+
+{}
+
+### Get reservation details
+
+GET http://127.0.0.1:8000/api/booking/2
 Content-Type: application/json
 Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
 
@@ -32,7 +40,7 @@ Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
 
 ### Create a reservation
 
-POST http://127.0.0.1:8000/api/bookings/
+POST http://127.0.0.1:8000/api/booking/
 Content-Type: application/json
 Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
 
@@ -43,17 +51,9 @@ Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
   "occasion": "Casual"
 }
 
-### Get reservation details
-
-GET http://127.0.0.1:8000/api/bookings/2
-Content-Type: application/json
-Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
-
-{}
-
 ### Correct a reservation
 
-PUT http://127.0.0.1:8000/api/bookings/3
+PUT http://127.0.0.1:8000/api/booking/3
 Content-Type: application/json
 Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
 
@@ -66,24 +66,64 @@ Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
 
 ### Delete a reservation
 
-DELETE http://127.0.0.1:8000/api/bookings/3/
+DELETE http://127.0.0.1:8000/api/booking/3/
 Content-Type: application/json
 Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
 
 {}
 
 ### Get all menu items
+GET http://127.0.0.1:8000/api/menu/
+Content-Type: application/json
 
 ### Get one menu item
+GET http://127.0.0.1:8000/api/menu/2
+Content-Type: application/json
 
 ### Get reviews for one item
+GET http://127.0.0.1:8000/api/review/?menu=2
+Content-Type: application/json
+Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
 
 ### Write a review
+POST http://127.0.0.1:8000/api/review/
+Content-Type: application/json
+Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
+
+{
+    "menu": "2",
+    "rating": "5",
+    "comment": "The Bruschetta was really good."
+}
 
 ### Edit a review
 
+PUT http://127.0.0.1:8000/api/review/
+Content-Type: application/json
+Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
+
+{
+    "pk": "47",
+    "menu": "2",
+    "rating": "5",
+    "comment": "The bruschetta was really good."
+}
+
 ### Delete a review
+
+DELETE http://127.0.0.1:8000/api/review/
+Content-Type: application/json
+Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
+
+{
+    "pk": "47",
+    "menu": "2",
+    "rating": "5",
+    "comment": "The bruschetta was really good."
+}
 
 ### Get restaurant hours
 
+GET http://127.0.0.1:8000/api/opening-hours/
+Content-Type: application/json
 

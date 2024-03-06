@@ -153,7 +153,7 @@
     async function fetchOwnReview() {
       data = await fetchAction(
         "GET",
-        "/reviews/?menu={{ item.pk }}&user={{ request.user.id }}"
+        "{% url 'review' %}?menu={{ item.pk }}&user={{ request.user.id }}"
       );
 
       if (data.rating > 0) {
@@ -173,7 +173,7 @@
     async function fetchReviews() {
       const data = await fetchAction(
         "GET",
-        "/reviews/?menu={{ item.pk }}&avoid={% for review in reviews %} {{ review.pk }}{% endfor %}" +
+        "{% url 'review' %}?menu={{ item.pk }}&avoid={% for review in reviews %} {{ review.pk }}{% endfor %}" +
           pkAlreadyLoaded
       );
 
@@ -198,7 +198,7 @@
       const rating = document.querySelector("input[name=rating]:checked").value;
       const comment = document.querySelector("textarea").value;
 
-      const url = "/reviews/";
+      const url = "{% url 'review' %}";
       csrfToken = getCookie("csrftoken");
       const body = {
         menu: "{{ item.pk }}",
@@ -239,7 +239,12 @@
         pk: userReviewPK,
       };
 
-      const data = await fetchAction("DELETE", "/reviews/", csrfToken, body);
+      const data = await fetchAction(
+        "DELETE",
+        "{% url 'review' %}",
+        csrfToken,
+        body
+      );
 
       if (data.message == "Review deleted successfully.") {
         deleteReviewDiv(userReviewPK);

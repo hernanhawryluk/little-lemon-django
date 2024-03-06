@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from menu.models import Menu
 from .models import OpeningHours
+from rest_framework.viewsets import ReadOnlyModelViewSet
+from .serializers import OpeningHoursSerializer
 
 
 # Create your views here.
@@ -11,3 +13,7 @@ def home(request):
 
 def about(request):
     return render(request, 'about.html', {})
+
+class OpeningHoursViewSet(ReadOnlyModelViewSet):
+    queryset = OpeningHours.objects.all()
+    serializer_class = OpeningHoursSerializer

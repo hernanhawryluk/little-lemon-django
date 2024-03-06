@@ -1,13 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import JsonResponse
 from .models import Booking
 from .forms import BookingForm
 from .serializers import BookingSerializer
-from rest_framework import viewsets, permissions
 from django.core.exceptions import ValidationError
 from datetime import datetime
-
-# Create your views here.
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.exceptions import PermissionDenied
+from rest_framework import status
 
 def booking_view(request):
     if request.method == 'POST':
@@ -25,15 +24,18 @@ def booking_view(request):
             errors = 'Something went wrong'
         return redirect('booking')
 
+
     if request.method == 'GET':
         errors = None
         form = BookingForm()
         bookings = Booking.objects.filter(user=request.user, date__gte=datetime.now().date()).order_by('date', 'time')
         return render(request, 'booking.html', {'form': BookingForm, 'errors': errors, 'bookings': bookings})
     
+
 def successful_booking_view(request, pk):
     booking = get_object_or_404(Booking, pk=pk, user=request.user)
     return render(request, 'success.html', {'booking': booking})
+
 
 def edit_booking_view(request, pk):
     booking = get_object_or_404(Booking, pk=pk, user=request.user)
@@ -59,6 +61,7 @@ def edit_booking_view(request, pk):
                 errors = 'Something went wrong'
             return render(request, 'edit.html', {'form': form, 'errors': errors, 'bookings': bookings, 'editing': pk})
         
+
 def delete_booking_view(request, pk):
     booking = get_object_or_404(Booking, pk=pk, user=request.user)
     if request.method == 'POST':
@@ -68,18 +71,27 @@ def delete_booking_view(request, pk):
     
     return render(request, 'cancelation.html', {'booking': booking})
 
-# class BookingViewSet(viewsets.ModelViewSet):
-#     queryset = Booking.objects.all()
-#     serializer_class = BookingSerializer
-#     permission_classes = [permissions.IsAuthenticated]
 
-#     def perform_create(self, serializer):
-#         serializer.save(user=self.request.user)
+class BookingListCreateView(ListCreateAPIView):
+    serializer_class = BookingSerializer
 
-#     def perform_update(self, serializer):
-#         if self.get_object().user == self.request.user:
-#             serializer.save()
-    
-#     def perform_destroy(self, instance):
-#         if instance.user == self.request.user:
-#             instance.delete()
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            return Booking.objects.filter(user = self.request.user)
+        else:
+            return Booking.objects.none()
+
+    def perform_create(self, serializer):
+        if self.request.user.is_authenticated:
+            serializer.save(user = self.request.user)
+        else:
+             raise PermissionDenied(detail='Not authorized', code=status.HTTP_401_UNAUTHORIZED)
+
+
+class BookingRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
+    queryset = Booking.objects.all()
+    serializer_class = BookingSerializer
+
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        return get_object_or_404(Booking, pk=pk, user=self.request.user)

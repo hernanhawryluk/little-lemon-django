@@ -3,20 +3,20 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied
 from rest_framework import status
-from django.http import Http404, JsonResponse
+from django.http import Http404
 from . models import Menu, Review
-# from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from .serializers import ReviewSerializer
 from math import ceil
-
-# Create your views here.
+from .serializers import MenuSerializer
+from rest_framework.viewsets import ModelViewSet
 
 def menu(request):
     menus = Menu.objects.filter(category__slug = 'food')
     drinks = Menu.objects.filter(category__slug = 'drink')
     desserts = Menu.objects.filter(category__slug = 'dessert')
     return render(request, 'menu.html', {'menus': menus, 'drinks': drinks, 'desserts': desserts })
+
 
 def menu_item(request, pk):
     item = get_object_or_404(Menu, pk = pk)
@@ -25,9 +25,9 @@ def menu_item(request, pk):
     reviews = Review.objects.filter(menu = pk).order_by('?')[:2]
     return render(request, 'menu-item.html', {'item': item, 'reviews': reviews, 'average_rating': average_rating, 'total_reviews': total_reviews})
 
+
 class ReviewViews(APIView):
     permission_classes = [IsAuthenticated]
-
     def get(self, request):
         menu = self.request.query_params.get('menu')
         avoid = self.request.query_params.get('avoid')
@@ -99,20 +99,21 @@ class ReviewViews(APIView):
         except Review.DoesNotExist:
             raise Http404
 
-# ----- Django Rest Framework Generics Views -----
 
-# class ReviewViews(generics.ListCreateAPIView):
-#     queryset = Review.objects.all()
-#     serializer_class = ReviewSerializer
-#     permission_classes = [IsAuthenticated]
+from random import sample
 
-#     def perform_create(self, serializer):
-#         serializer.save(user=self.request.user)
+class MenuViewSet(ModelViewSet):
+    queryset = Menu.objects.all()
+    serializer_class = MenuSerializer
+    
+    def create(self, request, *args, **kwargs):
+        return Response({'detail': 'Method not allowed.'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
-#     def perform_update(self, serializer):
-#         if self.get_object().user == self.request.user:
-#             serializer.save()
+    def update(self, request, *args, **kwargs):
+        return Response({'detail': 'Method not allowed.'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
-#     def perform_destroy(self, instance):
-#         if instance.user == self.request.user:
-#             instance.delete()
+    def partial_update(self, request, *args, **kwargs):
+        return Response({'detail': 'Method not allowed.'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    def destroy(self, request, *args, **kwargs):
+        return Response({'detail': 'Method not allowed.'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)

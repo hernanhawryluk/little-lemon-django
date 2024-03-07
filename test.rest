@@ -51,9 +51,9 @@ Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
   "occasion": "Casual"
 }
 
-### Correct a reservation
+### Edit a reservation
 
-PUT http://127.0.0.1:8000/api/booking/3
+PUT http://127.0.0.1:8000/api/booking/2/
 Content-Type: application/json
 Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
 

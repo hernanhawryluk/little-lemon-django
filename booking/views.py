@@ -24,12 +24,11 @@ def booking_view(request):
             errors = 'Something went wrong'
         return redirect('booking')
 
-
     if request.method == 'GET':
         errors = None
         form = BookingForm()
         bookings = Booking.objects.filter(user=request.user, date__gte=datetime.now().date()).order_by('date', 'time')
-        return render(request, 'booking.html', {'form': BookingForm, 'errors': errors, 'bookings': bookings})
+        return render(request, 'booking.html', {'form': form, 'errors': errors, 'bookings': bookings})
     
 
 def successful_booking_view(request, pk):

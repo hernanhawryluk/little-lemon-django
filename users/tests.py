@@ -13,6 +13,7 @@ class TestUserSetUp(TestCase):
             email = 'testuser@gmail.com', 
             password =  'TestPassword@12345!'
         )
+        self.token = Token.objects.create(user = self.user).key
 
 class AuthenticationViewRenderTest(TestUserSetUp):
     
@@ -42,15 +43,8 @@ class AuthenticationViewRenderTest(TestUserSetUp):
         self.assertEqual(self.client.session.get('_auth_user_id'), None)
 
 
-class AuthenticationViewAPITest(TestCase):
+class AuthenticationViewAPITest(TestUserSetUp):
     client = RequestsClient()
-    def setUp(self):
-        User.objects.create_user(
-            username = 'testuser', 
-            email = 'testuser@gmail.com', 
-            password =  'TestPassword@12345!'
-        )
-        self.token = Token.objects.create(user = User.objects.get(email = 'testuser@gmail.com')).key
 
     def test_register_without_data(self):
         response = self.client.post('http://127.0.0.1:8000/api/signup', {})
@@ -84,6 +78,10 @@ class AuthenticationViewAPITest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_token_without_it(self):
+        response = self.client.get('http://127.0.0.1:8000/api/test-token')
+        self.assertEqual(response.status_code, 403)
+
+    def test_token_right_token(self):
         response = self.client.get('http://127.0.0.1:8000/api/test-token', headers={'Authorization': f'Token {self.token}'})
         self.assertEqual(response.status_code, 200)
 

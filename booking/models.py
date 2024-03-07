@@ -37,8 +37,8 @@ class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(validators=[validate_date])
     time = models.TimeField(validators=[validate_time])
-    guests = models.SmallIntegerField(validators=[validate_guests])
-    occasion = models.CharField(max_length = 12, choices=occasion_choices)
+    guests = models.SmallIntegerField(validators=[validate_guests] , default = 1)
+    occasion = models.CharField(max_length = 12, choices=occasion_choices , default = 'Casual')
     created = models.DateTimeField(auto_now_add = True)
     updated = models.DateTimeField(auto_now = True)
 

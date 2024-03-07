@@ -117,9 +117,6 @@ Authorization: Token 1db86aacee077dcfceefdc28dd63af9bed5edfe3
 
 {
     "pk": "47",
-    "menu": "2",
-    "rating": "5",
-    "comment": "The bruschetta was really good."
 }
 
 ### Get restaurant hours

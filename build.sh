@@ -9,6 +9,5 @@ python manage.py collectstatic --no-input
 
 # temp for fixing migrations
 python manage.py migrate booking zero
-rm -f booking/migrations/*
 python manage.py makemigrations booking
 python manage.py migrate

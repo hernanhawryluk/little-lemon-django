@@ -51,7 +51,7 @@ Web server for a restaurant designed in Python, using the Django architecture. I
 
 ## Visit the web application:
 
-- https://www.render.com/?
+- https://little-lemon-django.onrender.com
 
 ## Explore the REST API service:
 

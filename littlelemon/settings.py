@@ -27,8 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-(4iye%c%9xwd$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'RENDER' not in os.environ
 
-if not DEBUG:
-    ALLOWED_HOSTS = ["little-lemon-django.onrender.com"]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'little-lemon-django.onrender.com']
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:

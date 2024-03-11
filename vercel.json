@@ -1,0 +1,14 @@
+{
+  "builds": [
+    {
+      "src": "littlelemon/wsgi.py",
+      "use": "@ardnt/vercel-python-wsgi"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "littlelemon/wsgi.py"
+    }
+  ]
+}

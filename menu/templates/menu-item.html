@@ -16,10 +16,17 @@
       </div>
       <div class="col-2 d-none d-md-block"></div>
       <div class="col-md-4 col-12 mt-4 mt-md-0" style="position: relative">
+        {% if item.image.url %}
         <img
           src="{{ item.image.url }}"
           class="img-fluid item-desc-img custom-rounded"
         />
+        {% else %}
+        <img
+          src="{{ item.image }}"
+          class="img-fluid item-desc-img custom-rounded"
+        />
+        {% endif %}
       </div>
     </div>
   </div>

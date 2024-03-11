@@ -28,11 +28,19 @@
         <article
           class="card custom-rounded shadow secondary-card custom-border"
         >
+          {% if menu.image.url %}
           <img
             src="{{ menu.image.url }}"
             style="aspect-ratio: 3/2.5"
             class="card-img-top custom-rounded-top"
           />
+          {% else %}
+          <img
+            src="{{ menu.image }}"
+            style="aspect-ratio: 3/2.5"
+            class="card-img-top custom-rounded-top"
+          />
+          {% endif %}
           <div class="card-body">
             <h5 class="card-title mt-1">{{ menu.name }}</h5>
             <p class="card-text pt-1">{{ menu.description }}</p>
@@ -72,11 +80,19 @@
         <article
           class="card custom-rounded shadow secondary-card custom-border"
         >
+          {% if drink.image.url %}
           <img
             src="{{ drink.image.url }}"
             style="aspect-ratio: 3/2.5"
             class="card-img-top custom-rounded-top"
           />
+          {% else %}
+          <img
+            src="{{ drink.image }}"
+            style="aspect-ratio: 3/2.5"
+            class="card-img-top custom-rounded-top"
+          />
+          {% endif %}
           <div class="card-body">
             <h5 class="card-title mt-1">{{ drink.name }}</h5>
             <p class="card-text pt-1">{{ drink.description }}</p>
@@ -116,11 +132,19 @@
         <article
           class="card custom-rounded shadow secondary-card custom-border"
         >
+          {% if dessert.image.url %}
           <img
             src="{{ dessert.image.url }}"
             style="aspect-ratio: 3/2.5"
             class="card-img-top custom-rounded-top"
           />
+          {% else %}
+          <img
+            src="{{ dessert.image }}"
+            style="aspect-ratio: 3/2.5"
+            class="card-img-top custom-rounded-top"
+          />
+          {% endif %}
           <div class="card-body">
             <h5 class="card-title mt-1">{{ dessert.name }}</h5>
             <p class="card-text pt-1">{{ dessert.description }}</p>

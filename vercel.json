@@ -10,5 +10,10 @@
       "src": "/(.*)",
       "dest": "littlelemon/wsgi.py"
     }
-  ]
+  ],
+  "functions": {
+    "api": {
+      "runtime": "python3.9"
+    }
+  }
 }

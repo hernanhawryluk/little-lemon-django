@@ -178,7 +178,7 @@
         />
         {% else %}
         <img
-          src="{% static 'img/' | add: menu.image %}"
+          src="{{ menu.image }}"
           style="aspect-ratio: 3/2.5"
           class="card-img-top custom-rounded-top"
         />

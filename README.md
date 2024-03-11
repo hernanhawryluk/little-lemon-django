@@ -51,7 +51,7 @@ Web server for a restaurant designed in Python, using the Django architecture. I
 
 ## Visit the web application:
 
-- https://little-lemon-django.onrender.com
+- https://little-lemon-django-iota.vercel.app/
 
 ## Explore the REST API service:
 

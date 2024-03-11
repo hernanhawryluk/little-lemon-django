@@ -18,9 +18,7 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav gap-5 custom-navbar">
         <li class="nav-item">
-          <a href="{% url 'home' %}" class="nav-link header-hover active">
-            Home
-          </a>
+          <a href="{% url 'home' %}" class="nav-link header-hover"> Home </a>
         </li>
         <li class="nav-item">
           <a class="nav-link header-hover" href="{% url 'about' %}"> About </a>
@@ -44,10 +42,28 @@
             Logout
           </button>
           {% else %}
-          <a href="/login" class="nav-link text-white">Login</a>
+          <a href="/login/" class="nav-link text-white">Login</a>
           {% endif %}
         </li>
       </ul>
     </div>
   </div>
+  <script>
+    let currentUrl = window.location.pathname;
+
+    document
+      .querySelectorAll(".navbar-nav a.nav-link")
+      .forEach(function (link) {
+        link.classList.remove("active");
+      });
+
+    document
+      .querySelectorAll(".navbar-nav a.nav-link")
+      .forEach(function (link) {
+        var linkUrl = new URL(link.href).pathname;
+        if (linkUrl === currentUrl) {
+          link.classList.add("active");
+        }
+      });
+  </script>
 </nav>

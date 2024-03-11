@@ -170,11 +170,19 @@
       class="text-decoration-none custom-hover"
     >
       <article class="card custom-rounded shadow secondary-card custom-border">
+        {% if menu.image.url %}
         <img
           src="{{ menu.image.url }}"
           style="aspect-ratio: 3/2.5"
           class="card-img-top custom-rounded-top"
         />
+        {% else %}
+        <img
+          src="{% static 'img/' | add: menu.image %}"
+          style="aspect-ratio: 3/2.5"
+          class="card-img-top custom-rounded-top"
+        />
+        {% endif %}
         <div class="card-body">
           <h5 class="card-title mt-1">{{ menu.name }}</h5>
           <p class="card-text pt-1">{{ menu.description }}</p>

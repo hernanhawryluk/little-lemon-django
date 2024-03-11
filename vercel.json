@@ -12,7 +12,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/littlelemon/wsgi.py"
+      "dest": "littlelemon/wsgi.py"
     }
   ]
 }

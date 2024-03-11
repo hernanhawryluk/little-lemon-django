@@ -2,7 +2,11 @@
   "builds": [
     {
       "src": "littlelemon/wsgi.py",
-      "use": "@ardnt/vercel-python-wsgi"
+      "use": "@ardnt/vercel-python-wsgi",
+      "config": {
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.9"
+      }
     }
   ],
   "routes": [
@@ -10,10 +14,5 @@
       "src": "/(.*)",
       "dest": "littlelemon/wsgi.py"
     }
-  ],
-  "functions": {
-    "api": {
-      "runtime": "python3.9"
-    }
-  }
+  ]
 }

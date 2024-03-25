@@ -4,7 +4,7 @@
   <div class="container" style="height: 390px">
     <div class="row">
       <div
-        class="col col-md-4 d-flex flex-column justify-content-evenly text-shadow"
+        class="col col-md-5 col-lg-4 d-flex flex-column justify-content-evenly text-shadow"
         style="height: 340px; padding-top: 40px"
       >
         <h1 class="display-2 custom-primary primary-font">
@@ -21,15 +21,14 @@
           <button class="custom-btn">Book a Table</button>
         </a>
       </div>
-      <div class="col-md-2"></div>
+      <div class="col-md-1 col-lg-2"></div>
       <div
-        class="col col-md-6 d-none d-md-flex justify-content-center mt-5 container-relative"
+        class="col col-md-6 d-none d-md-flex justify-content-end mt-5 container-relative"
         style="height: 320px"
       >
         <img
           src="{% static 'img/hero.webp' %}"
-          height="434px"
-          width="320px"
+          height="414px"
           class="custom-rounded absolute container-absolute"
           alt="Food presentation for Little Lemon Restaurant"
         />
@@ -38,8 +37,8 @@
   </div>
 </section>
 
-<section class="container section-margin">
-  <h2 class="display-4 primary-font mb-4 text-shadow" style="font-weight: 600">
+<section class="container section-margin py-4">
+  <h2 class="display-4 primary-font text-shadow pb-3" style="font-weight: 600">
     Discover our restaurant!
   </h2>
   <div
@@ -158,7 +157,7 @@
 </section>
 
 <section class="container section-margin">
-  <div class="d-flex justify-content-between mb-3">
+  <div class="d-flex justify-content-between mb-3 mt-5">
     <h3
       class="display-4 primary-font mb-4 text-shadow"
       style="font-weight: 600"
@@ -172,19 +171,21 @@
     </span>
   </div>
   <div
-    class="d-flex flex-column flex-md-row flex-wrap justify-content-between align-items-center gap-4"
+    class="d-flex flex-column flex-md-row flex-wrap justify-content-evenly align-items-center gap-2 pb-4 pb-lg-0"
   >
     {% for menu in menus %}
     <a
       href="{% url 'item' pk=menu.pk %}"
       class="text-decoration-none custom-hover"
     >
-      <article class="card custom-rounded shadow secondary-card custom-border">
+      <article
+        class="card custom-rounded shadow secondary-card custom-border mb-3"
+      >
         {% if menu.image.url %}
         <img
           src="{{ menu.image.url }}"
           height="210px"
-          width="240px"
+          width="230px"
           alt="{{ menu.name }}'s image"
           style="aspect-ratio: 3/2.5"
           class="card-img-top custom-rounded-top"

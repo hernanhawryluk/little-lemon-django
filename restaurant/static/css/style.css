@@ -13,6 +13,11 @@ body {
 
 /* ------ CUSTOM STYLES ----- */
 
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
 .primary-font {
   font-family: "Markazi Text", serif;
   font-optical-sizing: auto;
@@ -203,7 +208,7 @@ body {
 
 .secondary-card {
   height: 486px;
-  width: 260px;
+  width: 250px;
 }
 
 .padding-left {
@@ -409,6 +414,36 @@ select {
 
   .custom-hover:hover {
     transform: scale(1.1);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 95%;
+    margin: 0 auto;
+  }
+
+  .padding-left {
+    padding-left: 20px;
+  }
+
+  .padding-right {
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  .padding-left {
+    padding-left: 30px;
+  }
+
+  .padding-right {
+    padding-right: 30px;
   }
 }
 

@@ -19,11 +19,13 @@
         {% if item.image.url %}
         <img
           src="{{ item.image.url }}"
+          alt="{{ item.name }}"
           class="img-fluid item-desc-img custom-rounded"
         />
         {% else %}
         <img
           src="{{ item.image }}"
+          alt="{{ item.name }}"
           class="img-fluid item-desc-img custom-rounded"
         />
         {% endif %}

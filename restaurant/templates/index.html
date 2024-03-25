@@ -31,7 +31,7 @@
           height="434px"
           width="320px"
           class="custom-rounded absolute container-absolute"
-          alt=""
+          alt="Food presentation for Little Lemon Restaurant"
         />
       </div>
     </div>
@@ -49,6 +49,8 @@
       <img
         src="{% static 'img/opening_hours.webp' %}"
         class="card-img-top custom-rounded-top"
+        alt="An employee preparing food for the restaurant"
+        height="220px"
         width="240px"
       />
       <div class="card-body">
@@ -69,6 +71,8 @@
       <img
         src="{% static 'img/menu.webp' %}"
         class="card-img-top custom-rounded-top"
+        alt="The food is being prepared on the grill"
+        height="220px"
         width="240px"
       />
       <div class="card-body">
@@ -90,6 +94,8 @@
       <img
         src="{% static 'img/table.webp' %}"
         class="card-img-top custom-rounded-top"
+        alt="A sald dish elegantly garnished of the occasion"
+        height="220px"
         width="240px"
       />
       <div class="card-body">
@@ -134,12 +140,16 @@
       <div class="col container-relative" style="height: 440px">
         <img
           src="{% static 'img/about-1.webp' %}"
-          alt=""
+          alt="The restaurant owners preparing the dishes"
+          height="350px"
+          width="240px"
           class="custom-rounded special-img-1"
         />
         <img
           src="{% static 'img/about-2.webp' %}"
-          alt=""
+          alt="The restaurant owners preparing the dishes for the clients"
+          height="350px"
+          width="240px"
           class="custom-rounded special-img-2"
         />
       </div>
@@ -173,12 +183,18 @@
         {% if menu.image.url %}
         <img
           src="{{ menu.image.url }}"
+          height="210px"
+          width="240px"
+          alt="{{ menu.name }}'s image"
           style="aspect-ratio: 3/2.5"
           class="card-img-top custom-rounded-top"
         />
         {% else %}
         <img
           src="{{ menu.image }}"
+          height="210px"
+          width="240px"
+          alt="{{ menu.name }}'s image"
           style="aspect-ratio: 3/2.5"
           class="card-img-top custom-rounded-top"
         />
